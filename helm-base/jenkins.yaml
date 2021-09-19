@@ -3,42 +3,42 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: hb-jenkins
+  name: helm-base-jenkins
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 ---
 # Source: jenkins/templates/secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: hb-jenkins
+  name: helm-base-jenkins
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 type: Opaque
 data:
-  jenkins-admin-password: "RFhsUFlVT0hpM0JZbkRZTzFBbDJGTw=="
+  jenkins-admin-password: "Q0UwNG5qOWV5WEZTTVlHREl1UFdWNg=="
   jenkins-admin-user: "YWRtaW4="
 ---
 # Source: jenkins/templates/config.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: hb-jenkins
+  name: helm-base-jenkins
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 data:
   apply_config.sh: |-
@@ -71,15 +71,15 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: hb-jenkins-jenkins-jcasc-config
+  name: helm-base-jenkins-jenkins-jcasc-config
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": jenkins
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
-    hb-jenkins-jenkins-config: "true"
+    helm-base-jenkins-jenkins-config: "true"
 data:
   jcasc-default-config.yaml: |-
     jenkins:
@@ -109,14 +109,14 @@ data:
           defaultsProviderTemplate: ""
           connectTimeout: "5"
           readTimeout: "15"
-          jenkinsUrl: "http://hb-jenkins.helm-base.svc.cluster.local:8080"
-          jenkinsTunnel: "hb-jenkins-agent.helm-base.svc.cluster.local:50000"
+          jenkinsUrl: "http://helm-base-jenkins.helm-base.svc.cluster.local:8080"
+          jenkinsTunnel: "helm-base-jenkins-agent.helm-base.svc.cluster.local:50000"
           maxRequestsPerHostStr: "32"
           name: "kubernetes"
           namespace: "helm-base"
           serverUrl: "https://kubernetes.default"
           podLabels:
-          - key: "jenkins/hb-jenkins-agent"
+          - key: "jenkins/helm-base-jenkins-agent"
             value: "true"
           templates:
             - name: "default"
@@ -129,7 +129,7 @@ data:
                 envVars:
                   - envVar:
                       key: "JENKINS_URL"
-                      value: "http://hb-jenkins.helm-base.svc.cluster.local:8080/"
+                      value: "http://helm-base-jenkins.helm-base.svc.cluster.local:8080/"
                 image: "jenkins/inbound-agent:4.6-1"
                 privileged: "false"
                 resourceLimitCpu: 512m
@@ -142,7 +142,7 @@ data:
                 workingDir: /home/jenkins/agent
               idleMinutes: 0
               instanceCap: 2147483647
-              label: "hb-jenkins-agent "
+              label: "helm-base-jenkins-agent "
               nodeUsageMode: "NORMAL"
               podRetention: Never
               showRawYaml: true
@@ -160,19 +160,19 @@ data:
     unclassified:
       location:
         adminAddress: 
-        url: http://hb-jenkins:8080
+        url: http://helm-base-jenkins:8080
 ---
 # Source: jenkins/templates/home-pvc.yaml
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: hb-jenkins
+  name: helm-base-jenkins
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 spec:
   accessModes:
@@ -186,13 +186,13 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: hb-jenkins-schedule-agents
+  name: helm-base-jenkins-schedule-agents
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 rules:
 - apiGroups: [""]
@@ -208,13 +208,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: hb-jenkins-casc-reload
+  name: helm-base-jenkins-casc-reload
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 rules:
 - apiGroups: [""]
@@ -227,55 +227,55 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: hb-jenkins-schedule-agents
+  name: helm-base-jenkins-schedule-agents
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: hb-jenkins-schedule-agents
+  name: helm-base-jenkins-schedule-agents
 subjects:
 - kind: ServiceAccount
-  name: hb-jenkins
+  name: helm-base-jenkins
   namespace: helm-base
 ---
 # Source: jenkins/templates/rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: hb-jenkins-watch-configmaps
+  name: helm-base-jenkins-watch-configmaps
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: hb-jenkins-casc-reload
+  name: helm-base-jenkins-casc-reload
 subjects:
 - kind: ServiceAccount
-  name: hb-jenkins
+  name: helm-base-jenkins
   namespace: helm-base
 ---
 # Source: jenkins/templates/jenkins-agent-svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: hb-jenkins-agent
+  name: helm-base-jenkins-agent
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 spec:
   ports:
@@ -284,20 +284,20 @@ spec:
       name: agent-listener
   selector:
     "app.kubernetes.io/component": "jenkins-controller"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
   type: ClusterIP
 ---
 # Source: jenkins/templates/jenkins-controller-svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: hb-jenkins
+  name: helm-base-jenkins
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 spec:
   ports:
@@ -306,44 +306,44 @@ spec:
       targetPort: 8080
   selector:
     "app.kubernetes.io/component": "jenkins-controller"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
   type: ClusterIP
 ---
 # Source: jenkins/templates/jenkins-controller-statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: hb-jenkins
+  name: helm-base-jenkins
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
     "helm.sh/chart": "jenkins-3.5.18"
     "app.kubernetes.io/managed-by": "Helm"
-    "app.kubernetes.io/instance": "hb"
+    "app.kubernetes.io/instance": "helm-base"
     "app.kubernetes.io/component": "jenkins-controller"
 spec:
-  serviceName: hb-jenkins
+  serviceName: helm-base-jenkins
   replicas: 1
   selector:
     matchLabels:
       "app.kubernetes.io/component": "jenkins-controller"
-      "app.kubernetes.io/instance": "hb"
+      "app.kubernetes.io/instance": "helm-base"
   template:
     metadata:
       labels:
         "app.kubernetes.io/name": 'jenkins'
         "app.kubernetes.io/managed-by": "Helm"
-        "app.kubernetes.io/instance": "hb"
+        "app.kubernetes.io/instance": "helm-base"
         "app.kubernetes.io/component": "jenkins-controller"
       annotations:
-        checksum/config: 0c0ea43174d722f2a3ee35b72035aca3e2de59fc10f1d6365981cf091e466a5e
+        checksum/config: 0aade9d4c5941fbb7dcb3cf4228675152fcd9db47a82d4a6ef8e58afc7321378
     spec:
       securityContext:
     
         runAsUser: 1000
         fsGroup: 1000
         runAsNonRoot: true
-      serviceAccountName: "hb-jenkins"
+      serviceAccountName: "helm-base-jenkins"
       initContainers:
         - name: "init"
           image: "jenkins/jenkins:2.303.1-jdk11"
@@ -447,7 +447,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: LABEL
-              value: "hb-jenkins-jenkins-config"
+              value: "helm-base-jenkins-jenkins-config"
             - name: FOLDER
               value: "/var/jenkins_home/casc_configs"
             - name: NAMESPACE
@@ -471,37 +471,37 @@ spec:
         emptyDir: {}
       - name: jenkins-config
         configMap:
-          name: hb-jenkins
+          name: helm-base-jenkins
       - name: plugin-dir
         emptyDir: {}
       - name: jenkins-home
         persistentVolumeClaim:
-          claimName: hb-jenkins
+          claimName: helm-base-jenkins
       - name: sc-config-volume
         emptyDir: {}
       - name: admin-secret
         secret:
-          secretName: hb-jenkins
+          secretName: helm-base-jenkins
 ---
 # Source: jenkins/templates/tests/test-config.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: hb-jenkins-tests
+  name: helm-base-jenkins-tests
   namespace: helm-base
   annotations:
     "helm.sh/hook": test
 data:
   run.sh: |-
     @test "Testing Jenkins UI is accessible" {
-      curl --retry 48 --retry-delay 10 hb-jenkins:8080/login
+      curl --retry 48 --retry-delay 10 helm-base-jenkins:8080/login
     }
 ---
 # Source: jenkins/templates/tests/jenkins-test.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "hb-ui-test-i66gl"
+  name: "helm-base-ui-test-gp2wk"
   namespace: helm-base
   annotations:
     "helm.sh/hook": test-success
@@ -521,7 +521,7 @@ spec:
       - mountPath: /tools
         name: tools
   containers:
-    - name: hb-ui-test
+    - name: helm-base-ui-test
       image: jenkins/jenkins:2.303.1-jdk11
       command: ["/tools/bats/bin/bats", "-t", "/tests/run.sh"]
       volumeMounts:
@@ -533,7 +533,7 @@ spec:
   volumes:
   - name: tests
     configMap:
-      name: hb-jenkins-tests
+      name: helm-base-jenkins-tests
   - name: tools
     emptyDir: {}
   restartPolicy: Never
