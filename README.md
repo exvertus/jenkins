@@ -10,13 +10,14 @@ jenkins
 ```
 
 ### How to...
+* Print out applied yaml to build folder: `kubectl apply -k --dry-run ./overlays/tom-gke`
 * Update base from helm in cloud shell
   * Set env var HELM_INSTALL_DIR to your home directory
   * Follow instructions for installing [helm from script](https://helm.sh/docs/intro/install/#from-script)
   * `helm repo add jenkins https://charts.jenkins.io`
   * `helm repo update`
   * `helm template helm-base jenkins/jenkins -n helm-base > helm-base/jenkins.yaml`
-  * Test base with
+  * Helm-base test deployment
     * `kubectl apply -k ./helm-base`
     * `kubectl get pods -n helm-base`
     * `kubectl port-forward -n helm-base [HELM_BASE_PODNAME] 8080:8080 >> /dev/null`
