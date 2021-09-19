@@ -1,0 +1,3 @@
+resources:
+- helm-base.yaml
+- jenkins.yaml
