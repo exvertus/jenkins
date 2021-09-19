@@ -10,7 +10,7 @@ jenkins
 ```
 
 ### How to...
-* Print out applied yaml to build folder: `kubectl apply -k --dry-run ./overlays/tom-gke`
+* Print out applied yaml to build folder: `kubectl apply -k --dry-run ./overlays/tom-gke > build/dry-run.yaml`
 * Update base from helm in cloud shell
   * Set env var HELM_INSTALL_DIR to your home directory
   * Follow instructions for installing [helm from script](https://helm.sh/docs/intro/install/#from-script)
