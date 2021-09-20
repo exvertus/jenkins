@@ -2,3 +2,6 @@ namePrefix: gke-
 namespace: services
 resources:
   - ../../helm-base
+
+patchesStrategicMerge:
+  - svc-patch.yaml

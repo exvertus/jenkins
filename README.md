@@ -11,6 +11,7 @@ jenkins
 
 ### How to...
 
+* Deploy changes: `kubectl apply -k ./overlays/tom-gke`
 * Print out applied yaml to build folder: `kubectl apply -k ./overlays/tom-gke --dry-run=client -o yaml > build/dry-run.yaml`
 * Update base from helm in cloud shell
   * Set env var HELM_INSTALL_DIR to your home directory
