@@ -1,3 +1,4 @@
+namePrefix: gke-
 namespace: services
 resources:
   - ../../helm-base
