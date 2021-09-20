@@ -20,28 +20,28 @@ items:
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins","namespace":"services"}}
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins","namespace":"services"}}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins
+    name: gke-tom-jenkins
     namespace: services
 - apiVersion: rbac.authorization.k8s.io/v1
   kind: Role
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins-casc-reload","namespace":"services"},"rules":[{"apiGroups":[""],"resources":["configmaps"],"verbs":["get","watch","list"]}]}
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins-casc-reload","namespace":"services"},"rules":[{"apiGroups":[""],"resources":["configmaps"],"verbs":["get","watch","list"]}]}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins-casc-reload
+    name: gke-tom-jenkins-casc-reload
     namespace: services
   rules:
   - apiGroups:
@@ -57,14 +57,14 @@ items:
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins-schedule-agents","namespace":"services"},"rules":[{"apiGroups":[""],"resources":["pods","pods/exec","pods/log","persistentvolumeclaims","events"],"verbs":["get","list","watch"]},{"apiGroups":[""],"resources":["pods","pods/exec","persistentvolumeclaims"],"verbs":["create","delete","deletecollection","patch","update"]}]}
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins-schedule-agents","namespace":"services"},"rules":[{"apiGroups":[""],"resources":["pods","pods/exec","pods/log","persistentvolumeclaims","events"],"verbs":["get","list","watch"]},{"apiGroups":[""],"resources":["pods","pods/exec","persistentvolumeclaims"],"verbs":["create","delete","deletecollection","patch","update"]}]}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins-schedule-agents
+    name: gke-tom-jenkins-schedule-agents
     namespace: services
   rules:
   - apiGroups:
@@ -96,44 +96,44 @@ items:
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"RoleBinding","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins-schedule-agents","namespace":"services"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"Role","name":"helm-base-jenkins-schedule-agents"},"subjects":[{"kind":"ServiceAccount","name":"helm-base-jenkins","namespace":"services"}]}
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"RoleBinding","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins-schedule-agents","namespace":"services"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"Role","name":"gke-tom-jenkins-schedule-agents"},"subjects":[{"kind":"ServiceAccount","name":"gke-tom-jenkins","namespace":"services"}]}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins-schedule-agents
+    name: gke-tom-jenkins-schedule-agents
     namespace: services
   roleRef:
     apiGroup: rbac.authorization.k8s.io
     kind: Role
-    name: helm-base-jenkins-schedule-agents
+    name: gke-tom-jenkins-schedule-agents
   subjects:
   - kind: ServiceAccount
-    name: helm-base-jenkins
+    name: gke-tom-jenkins
     namespace: services
 - apiVersion: rbac.authorization.k8s.io/v1
   kind: RoleBinding
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"RoleBinding","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins-watch-configmaps","namespace":"services"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"Role","name":"helm-base-jenkins-casc-reload"},"subjects":[{"kind":"ServiceAccount","name":"helm-base-jenkins","namespace":"services"}]}
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"RoleBinding","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins-watch-configmaps","namespace":"services"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"Role","name":"gke-tom-jenkins-casc-reload"},"subjects":[{"kind":"ServiceAccount","name":"gke-tom-jenkins","namespace":"services"}]}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins-watch-configmaps
+    name: gke-tom-jenkins-watch-configmaps
     namespace: services
   roleRef:
     apiGroup: rbac.authorization.k8s.io
     kind: Role
-    name: helm-base-jenkins-casc-reload
+    name: gke-tom-jenkins-casc-reload
   subjects:
   - kind: ServiceAccount
-    name: helm-base-jenkins
+    name: gke-tom-jenkins
     namespace: services
 - apiVersion: v1
   data:
@@ -166,13 +166,13 @@ items:
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","data":{"apply_config.sh":"set -e\necho \"disable Setup Wizard\"\n# Prevent Setup Wizard when JCasC is enabled\necho $JENKINS_VERSION \u003e /var/jenkins_home/jenkins.install.UpgradeWizard.state\necho $JENKINS_VERSION \u003e /var/jenkins_home/jenkins.install.InstallUtil.lastExecVersion\necho \"download plugins\"\n# Install missing plugins\ncp /var/jenkins_config/plugins.txt /var/jenkins_home;\nrm -rf /usr/share/jenkins/ref/plugins/*.lock\nversion () { echo \"$@\" | awk -F. '{ printf(\"%d%03d%03d%03d\\n\", $1,$2,$3,$4); }'; }\nif [ -f \"/usr/share/jenkins/jenkins.war\" ] \u0026\u0026 [ -n \"$(command -v jenkins-plugin-cli)\" 2\u003e/dev/null ] \u0026\u0026 [ $(version $(jenkins-plugin-cli --version)) -ge $(version \"2.1.1\") ]; then\n  jenkins-plugin-cli --verbose --war \"/usr/share/jenkins/jenkins.war\" --plugin-file \"/var/jenkins_home/plugins.txt\" --latest true;\nelse\n  /usr/local/bin/install-plugins.sh `echo $(cat /var/jenkins_home/plugins.txt)`;\nfi\necho \"copy plugins to shared volume\"\n# Copy plugins to shared volume\nyes n | cp -i /usr/share/jenkins/ref/plugins/* /var/jenkins_plugins/;\necho \"finished initialization\"","plugins.txt":"kubernetes:1.30.1\nworkflow-aggregator:2.6\ngit:4.8.2\nconfiguration-as-code:1.52"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins"},"name":"helm-base-jenkins","namespace":"services"}}
+        {"apiVersion":"v1","data":{"apply_config.sh":"set -e\necho \"disable Setup Wizard\"\n# Prevent Setup Wizard when JCasC is enabled\necho $JENKINS_VERSION \u003e /var/jenkins_home/jenkins.install.UpgradeWizard.state\necho $JENKINS_VERSION \u003e /var/jenkins_home/jenkins.install.InstallUtil.lastExecVersion\necho \"download plugins\"\n# Install missing plugins\ncp /var/jenkins_config/plugins.txt /var/jenkins_home;\nrm -rf /usr/share/jenkins/ref/plugins/*.lock\nversion () { echo \"$@\" | awk -F. '{ printf(\"%d%03d%03d%03d\\n\", $1,$2,$3,$4); }'; }\nif [ -f \"/usr/share/jenkins/jenkins.war\" ] \u0026\u0026 [ -n \"$(command -v jenkins-plugin-cli)\" 2\u003e/dev/null ] \u0026\u0026 [ $(version $(jenkins-plugin-cli --version)) -ge $(version \"2.1.1\") ]; then\n  jenkins-plugin-cli --verbose --war \"/usr/share/jenkins/jenkins.war\" --plugin-file \"/var/jenkins_home/plugins.txt\" --latest true;\nelse\n  /usr/local/bin/install-plugins.sh `echo $(cat /var/jenkins_home/plugins.txt)`;\nfi\necho \"copy plugins to shared volume\"\n# Copy plugins to shared volume\nyes n | cp -i /usr/share/jenkins/ref/plugins/* /var/jenkins_plugins/;\necho \"finished initialization\"","plugins.txt":"kubernetes:1.30.1\nworkflow-aggregator:2.6\ngit:4.8.2\nconfiguration-as-code:1.52"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins"},"name":"gke-tom-jenkins","namespace":"services"}}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
-    name: helm-base-jenkins
+    name: gke-tom-jenkins
     namespace: services
 - apiVersion: v1
   data:
@@ -184,72 +184,72 @@ items:
       NORMAL\n  numExecutors: 0\n  labelString: \"\"\n  projectNamingStrategy: \"standard\"\n
       \ markupFormatter:\n    plainText\n  clouds:\n  - kubernetes:\n      containerCapStr:
       \"10\"\n      defaultsProviderTemplate: \"\"\n      connectTimeout: \"5\"\n
-      \     readTimeout: \"15\"\n      jenkinsUrl: \"http://helm-base-jenkins.helm-base.svc.cluster.local:8080\"\n
-      \     jenkinsTunnel: \"helm-base-jenkins-agent.helm-base.svc.cluster.local:50000\"\n
+      \     readTimeout: \"15\"\n      jenkinsUrl: \"http://tom-jenkins.helm-base.svc.cluster.local:8080\"\n
+      \     jenkinsTunnel: \"tom-jenkins-agent.helm-base.svc.cluster.local:50000\"\n
       \     maxRequestsPerHostStr: \"32\"\n      name: \"kubernetes\"\n      namespace:
       \"helm-base\"\n      serverUrl: \"https://kubernetes.default\"\n      podLabels:\n
-      \     - key: \"jenkins/helm-base-jenkins-agent\"\n        value: \"true\"\n
-      \     templates:\n        - name: \"default\"\n          id: 8e87a0373bebcc6a10449d2a90262bb02a7cf7e5ec63c98cc4e123b67e58650a\n
+      \     - key: \"jenkins/tom-jenkins-agent\"\n        value: \"true\"\n      templates:\n
+      \       - name: \"default\"\n          id: 8e87a0373bebcc6a10449d2a90262bb02a7cf7e5ec63c98cc4e123b67e58650a\n
       \         containers:\n          - name: \"jnlp\"\n            alwaysPullImage:
       false\n            args: \"^${computer.jnlpmac} ^${computer.name}\"\n            command:
       \n            envVars:\n              - envVar:\n                  key: \"JENKINS_URL\"\n
-      \                 value: \"http://helm-base-jenkins.helm-base.svc.cluster.local:8080/\"\n
+      \                 value: \"http://tom-jenkins.helm-base.svc.cluster.local:8080/\"\n
       \           image: \"jenkins/inbound-agent:4.6-1\"\n            privileged:
       \"false\"\n            resourceLimitCpu: 512m\n            resourceLimitMemory:
       512Mi\n            resourceRequestCpu: 512m\n            resourceRequestMemory:
       512Mi\n            runAsUser: \n            runAsGroup: \n            ttyEnabled:
       false\n            workingDir: /home/jenkins/agent\n          idleMinutes: 0\n
-      \         instanceCap: 2147483647\n          label: \"helm-base-jenkins-agent
-      \"\n          nodeUsageMode: \"NORMAL\"\n          podRetention: Never\n          showRawYaml:
+      \         instanceCap: 2147483647\n          label: \"tom-jenkins-agent \"\n
+      \         nodeUsageMode: \"NORMAL\"\n          podRetention: Never\n          showRawYaml:
       true\n          serviceAccount: \"default\"\n          slaveConnectTimeoutStr:
       \"100\"\n          yamlMergeStrategy: override\n  crumbIssuer:\n    standard:\n
       \     excludeClientIPFromCrumb: true\nsecurity:\n  apiToken:\n    creationOfLegacyTokenEnabled:
       false\n    tokenGenerationOnCreationEnabled: false\n    usageStatisticsEnabled:
-      true\nunclassified:\n  location:\n    adminAddress: \n    url: http://helm-base-jenkins:8080"
+      true\nunclassified:\n  location:\n    adminAddress: \n    url: http://tom-jenkins:8080"
   kind: ConfigMap
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","data":{"jcasc-default-config.yaml":"jenkins:\n  authorizationStrategy:\n    loggedInUsersCanDoAnything:\n      allowAnonymousRead: false\n  securityRealm:\n    local:\n      allowsSignup: false\n      enableCaptcha: false\n      users:\n      - id: \"${chart-admin-username}\"\n        name: \"Jenkins Admin\"\n        password: \"${chart-admin-password}\"\n  disableRememberMe: false\n  remotingSecurity:\n    enabled: true\n  mode: NORMAL\n  numExecutors: 0\n  labelString: \"\"\n  projectNamingStrategy: \"standard\"\n  markupFormatter:\n    plainText\n  clouds:\n  - kubernetes:\n      containerCapStr: \"10\"\n      defaultsProviderTemplate: \"\"\n      connectTimeout: \"5\"\n      readTimeout: \"15\"\n      jenkinsUrl: \"http://helm-base-jenkins.helm-base.svc.cluster.local:8080\"\n      jenkinsTunnel: \"helm-base-jenkins-agent.helm-base.svc.cluster.local:50000\"\n      maxRequestsPerHostStr: \"32\"\n      name: \"kubernetes\"\n      namespace: \"helm-base\"\n      serverUrl: \"https://kubernetes.default\"\n      podLabels:\n      - key: \"jenkins/helm-base-jenkins-agent\"\n        value: \"true\"\n      templates:\n        - name: \"default\"\n          id: 8e87a0373bebcc6a10449d2a90262bb02a7cf7e5ec63c98cc4e123b67e58650a\n          containers:\n          - name: \"jnlp\"\n            alwaysPullImage: false\n            args: \"^${computer.jnlpmac} ^${computer.name}\"\n            command: \n            envVars:\n              - envVar:\n                  key: \"JENKINS_URL\"\n                  value: \"http://helm-base-jenkins.helm-base.svc.cluster.local:8080/\"\n            image: \"jenkins/inbound-agent:4.6-1\"\n            privileged: \"false\"\n            resourceLimitCpu: 512m\n            resourceLimitMemory: 512Mi\n            resourceRequestCpu: 512m\n            resourceRequestMemory: 512Mi\n            runAsUser: \n            runAsGroup: \n            ttyEnabled: false\n            workingDir: /home/jenkins/agent\n          idleMinutes: 0\n          instanceCap: 2147483647\n          label: \"helm-base-jenkins-agent \"\n          nodeUsageMode: \"NORMAL\"\n          podRetention: Never\n          showRawYaml: true\n          serviceAccount: \"default\"\n          slaveConnectTimeoutStr: \"100\"\n          yamlMergeStrategy: override\n  crumbIssuer:\n    standard:\n      excludeClientIPFromCrumb: true\nsecurity:\n  apiToken:\n    creationOfLegacyTokenEnabled: false\n    tokenGenerationOnCreationEnabled: false\n    usageStatisticsEnabled: true\nunclassified:\n  location:\n    adminAddress: \n    url: http://helm-base-jenkins:8080"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm-base-jenkins-jenkins-config":"true","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins-jenkins-jcasc-config","namespace":"services"}}
+        {"apiVersion":"v1","data":{"jcasc-default-config.yaml":"jenkins:\n  authorizationStrategy:\n    loggedInUsersCanDoAnything:\n      allowAnonymousRead: false\n  securityRealm:\n    local:\n      allowsSignup: false\n      enableCaptcha: false\n      users:\n      - id: \"${chart-admin-username}\"\n        name: \"Jenkins Admin\"\n        password: \"${chart-admin-password}\"\n  disableRememberMe: false\n  remotingSecurity:\n    enabled: true\n  mode: NORMAL\n  numExecutors: 0\n  labelString: \"\"\n  projectNamingStrategy: \"standard\"\n  markupFormatter:\n    plainText\n  clouds:\n  - kubernetes:\n      containerCapStr: \"10\"\n      defaultsProviderTemplate: \"\"\n      connectTimeout: \"5\"\n      readTimeout: \"15\"\n      jenkinsUrl: \"http://tom-jenkins.helm-base.svc.cluster.local:8080\"\n      jenkinsTunnel: \"tom-jenkins-agent.helm-base.svc.cluster.local:50000\"\n      maxRequestsPerHostStr: \"32\"\n      name: \"kubernetes\"\n      namespace: \"helm-base\"\n      serverUrl: \"https://kubernetes.default\"\n      podLabels:\n      - key: \"jenkins/tom-jenkins-agent\"\n        value: \"true\"\n      templates:\n        - name: \"default\"\n          id: 8e87a0373bebcc6a10449d2a90262bb02a7cf7e5ec63c98cc4e123b67e58650a\n          containers:\n          - name: \"jnlp\"\n            alwaysPullImage: false\n            args: \"^${computer.jnlpmac} ^${computer.name}\"\n            command: \n            envVars:\n              - envVar:\n                  key: \"JENKINS_URL\"\n                  value: \"http://tom-jenkins.helm-base.svc.cluster.local:8080/\"\n            image: \"jenkins/inbound-agent:4.6-1\"\n            privileged: \"false\"\n            resourceLimitCpu: 512m\n            resourceLimitMemory: 512Mi\n            resourceRequestCpu: 512m\n            resourceRequestMemory: 512Mi\n            runAsUser: \n            runAsGroup: \n            ttyEnabled: false\n            workingDir: /home/jenkins/agent\n          idleMinutes: 0\n          instanceCap: 2147483647\n          label: \"tom-jenkins-agent \"\n          nodeUsageMode: \"NORMAL\"\n          podRetention: Never\n          showRawYaml: true\n          serviceAccount: \"default\"\n          slaveConnectTimeoutStr: \"100\"\n          yamlMergeStrategy: override\n  crumbIssuer:\n    standard:\n      excludeClientIPFromCrumb: true\nsecurity:\n  apiToken:\n    creationOfLegacyTokenEnabled: false\n    tokenGenerationOnCreationEnabled: false\n    usageStatisticsEnabled: true\nunclassified:\n  location:\n    adminAddress: \n    url: http://tom-jenkins:8080"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18","tom-jenkins-jenkins-config":"true"},"name":"gke-tom-jenkins-jenkins-jcasc-config","namespace":"services"}}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
-      helm-base-jenkins-jenkins-config: "true"
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins-jenkins-jcasc-config
+      tom-jenkins-jenkins-config: "true"
+    name: gke-tom-jenkins-jenkins-jcasc-config
     namespace: services
 - apiVersion: v1
   data:
     run.sh: |-
       @test "Testing Jenkins UI is accessible" {
-        curl --retry 48 --retry-delay 10 helm-base-jenkins:8080/login
+        curl --retry 48 --retry-delay 10 tom-jenkins:8080/login
       }
   kind: ConfigMap
   metadata:
     annotations:
       helm.sh/hook: test
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","data":{"run.sh":"@test \"Testing Jenkins UI is accessible\" {\n  curl --retry 48 --retry-delay 10 helm-base-jenkins:8080/login\n}"},"kind":"ConfigMap","metadata":{"annotations":{"helm.sh/hook":"test"},"name":"helm-base-jenkins-tests","namespace":"services"}}
-    name: helm-base-jenkins-tests
+        {"apiVersion":"v1","data":{"run.sh":"@test \"Testing Jenkins UI is accessible\" {\n  curl --retry 48 --retry-delay 10 tom-jenkins:8080/login\n}"},"kind":"ConfigMap","metadata":{"annotations":{"helm.sh/hook":"test"},"name":"gke-tom-jenkins-tests","namespace":"services"}}
+    name: gke-tom-jenkins-tests
     namespace: services
 - apiVersion: v1
   data:
-    jenkins-admin-password: Q0UwNG5qOWV5WEZTTVlHREl1UFdWNg==
+    jenkins-admin-password: Yjd4VTRNVEFOT3dMdTIyU3Qwa1VHOA==
     jenkins-admin-user: YWRtaW4=
   kind: Secret
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","data":{"jenkins-admin-password":"Q0UwNG5qOWV5WEZTTVlHREl1UFdWNg==","jenkins-admin-user":"YWRtaW4="},"kind":"Secret","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins","namespace":"services"},"type":"Opaque"}
+        {"apiVersion":"v1","data":{"jenkins-admin-password":"Yjd4VTRNVEFOT3dMdTIyU3Qwa1VHOA==","jenkins-admin-user":"YWRtaW4="},"kind":"Secret","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins","namespace":"services"},"type":"Opaque"}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins
+    name: gke-tom-jenkins
     namespace: services
   type: Opaque
 - apiVersion: v1
@@ -257,14 +257,14 @@ items:
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins","namespace":"services"},"spec":{"ports":[{"name":"http","port":8080,"targetPort":8080}],"selector":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base"},"type":"ClusterIP"}}
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins","namespace":"services"},"spec":{"ports":[{"name":"http","port":8080,"targetPort":8080}],"selector":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom"},"type":"ClusterIP"}}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins
+    name: gke-tom-jenkins
     namespace: services
   spec:
     ports:
@@ -273,21 +273,21 @@ items:
       targetPort: 8080
     selector:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
     type: ClusterIP
 - apiVersion: v1
   kind: Service
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins-agent","namespace":"services"},"spec":{"ports":[{"name":"agent-listener","port":50000,"targetPort":50000}],"selector":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base"},"type":"ClusterIP"}}
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins-agent","namespace":"services"},"spec":{"ports":[{"name":"agent-listener","port":50000,"targetPort":50000}],"selector":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom"},"type":"ClusterIP"}}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins-agent
+    name: gke-tom-jenkins-agent
     namespace: services
   spec:
     ports:
@@ -296,21 +296,21 @@ items:
       targetPort: 50000
     selector:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
     type: ClusterIP
 - apiVersion: v1
   kind: PersistentVolumeClaim
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins","namespace":"services"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"8Gi"}}}}
+        {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins","namespace":"services"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"8Gi"}}}}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins
+    name: gke-tom-jenkins
     namespace: services
   spec:
     accessModes:
@@ -323,29 +323,29 @@ items:
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"helm-base-jenkins","namespace":"services"},"spec":{"replicas":1,"selector":{"matchLabels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base"}},"serviceName":"helm-base-jenkins","template":{"metadata":{"annotations":{"checksum/config":"0aade9d4c5941fbb7dcb3cf4228675152fcd9db47a82d4a6ef8e58afc7321378"},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"helm-base","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins"}},"spec":{"containers":[{"args":["--httpPort=8080"],"env":[{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}},{"name":"JAVA_OPTS","value":"-Dcasc.reload.token=$(POD_NAME) "},{"name":"JENKINS_OPTS","value":""},{"name":"JENKINS_SLAVE_AGENT_PORT","value":"50000"},{"name":"CASC_JENKINS_CONFIG","value":"/var/jenkins_home/casc_configs"}],"image":"jenkins/jenkins:2.303.1-jdk11","imagePullPolicy":"Always","livenessProbe":{"failureThreshold":5,"httpGet":{"path":"/login","port":"http"},"periodSeconds":10,"timeoutSeconds":5},"name":"jenkins","ports":[{"containerPort":8080,"name":"http"},{"containerPort":50000,"name":"agent-listener"}],"readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/login","port":"http"},"periodSeconds":10,"timeoutSeconds":5},"resources":{"limits":{"cpu":"2000m","memory":"4096Mi"},"requests":{"cpu":"50m","memory":"256Mi"}},"startupProbe":{"failureThreshold":12,"httpGet":{"path":"/login","port":"http"},"periodSeconds":10,"timeoutSeconds":5},"volumeMounts":[{"mountPath":"/var/jenkins_home","name":"jenkins-home","readOnly":false},{"mountPath":"/var/jenkins_config","name":"jenkins-config","readOnly":true},{"mountPath":"/usr/share/jenkins/ref/plugins/","name":"plugin-dir","readOnly":false},{"mountPath":"/var/jenkins_home/casc_configs","name":"sc-config-volume"},{"mountPath":"/run/secrets/chart-admin-username","name":"admin-secret","readOnly":true,"subPath":"jenkins-admin-user"},{"mountPath":"/run/secrets/chart-admin-password","name":"admin-secret","readOnly":true,"subPath":"jenkins-admin-password"}]},{"env":[{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}},{"name":"LABEL","value":"helm-base-jenkins-jenkins-config"},{"name":"FOLDER","value":"/var/jenkins_home/casc_configs"},{"name":"NAMESPACE","value":"helm-base"},{"name":"REQ_URL","value":"http://localhost:8080/reload-configuration-as-code/?casc-reload-token=$(POD_NAME)"},{"name":"REQ_METHOD","value":"POST"},{"name":"REQ_RETRY_CONNECT","value":"10"}],"image":"kiwigrid/k8s-sidecar:1.12.2","imagePullPolicy":"IfNotPresent","name":"config-reload","resources":{},"volumeMounts":[{"mountPath":"/var/jenkins_home/casc_configs","name":"sc-config-volume"},{"mountPath":"/var/jenkins_home","name":"jenkins-home"}]}],"initContainers":[{"command":["sh","/var/jenkins_config/apply_config.sh"],"image":"jenkins/jenkins:2.303.1-jdk11","imagePullPolicy":"Always","name":"init","resources":{"limits":{"cpu":"2000m","memory":"4096Mi"},"requests":{"cpu":"50m","memory":"256Mi"}},"volumeMounts":[{"mountPath":"/var/jenkins_home","name":"jenkins-home"},{"mountPath":"/var/jenkins_config","name":"jenkins-config"},{"mountPath":"/usr/share/jenkins/ref/plugins","name":"plugins"},{"mountPath":"/var/jenkins_plugins","name":"plugin-dir"}]}],"securityContext":{"fsGroup":1000,"runAsNonRoot":true,"runAsUser":1000},"serviceAccountName":"helm-base-jenkins","volumes":[{"emptyDir":{},"name":"plugins"},{"configMap":{"name":"helm-base-jenkins"},"name":"jenkins-config"},{"emptyDir":{},"name":"plugin-dir"},{"name":"jenkins-home","persistentVolumeClaim":{"claimName":"helm-base-jenkins"}},{"emptyDir":{},"name":"sc-config-volume"},{"name":"admin-secret","secret":{"secretName":"helm-base-jenkins"}}]}}}}
+        {"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins","namespace":"services"},"spec":{"replicas":1,"selector":{"matchLabels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom"}},"serviceName":"gke-tom-jenkins","template":{"metadata":{"annotations":{"checksum/config":"6e59b21e88943eb94337411fc892bc745e43a1becc8e20433471e8f3cbafb226"},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins"}},"spec":{"containers":[{"args":["--httpPort=8080"],"env":[{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}},{"name":"JAVA_OPTS","value":"-Dcasc.reload.token=$(POD_NAME) "},{"name":"JENKINS_OPTS","value":""},{"name":"JENKINS_SLAVE_AGENT_PORT","value":"50000"},{"name":"CASC_JENKINS_CONFIG","value":"/var/jenkins_home/casc_configs"}],"image":"jenkins/jenkins:2.303.1-jdk11","imagePullPolicy":"Always","livenessProbe":{"failureThreshold":5,"httpGet":{"path":"/login","port":"http"},"periodSeconds":10,"timeoutSeconds":5},"name":"jenkins","ports":[{"containerPort":8080,"name":"http"},{"containerPort":50000,"name":"agent-listener"}],"readinessProbe":{"failureThreshold":3,"httpGet":{"path":"/login","port":"http"},"periodSeconds":10,"timeoutSeconds":5},"resources":{"limits":{"cpu":"2000m","memory":"4096Mi"},"requests":{"cpu":"50m","memory":"256Mi"}},"startupProbe":{"failureThreshold":12,"httpGet":{"path":"/login","port":"http"},"periodSeconds":10,"timeoutSeconds":5},"volumeMounts":[{"mountPath":"/var/jenkins_home","name":"jenkins-home","readOnly":false},{"mountPath":"/var/jenkins_config","name":"jenkins-config","readOnly":true},{"mountPath":"/usr/share/jenkins/ref/plugins/","name":"plugin-dir","readOnly":false},{"mountPath":"/var/jenkins_home/casc_configs","name":"sc-config-volume"},{"mountPath":"/run/secrets/chart-admin-username","name":"admin-secret","readOnly":true,"subPath":"jenkins-admin-user"},{"mountPath":"/run/secrets/chart-admin-password","name":"admin-secret","readOnly":true,"subPath":"jenkins-admin-password"}]},{"env":[{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}},{"name":"LABEL","value":"tom-jenkins-jenkins-config"},{"name":"FOLDER","value":"/var/jenkins_home/casc_configs"},{"name":"NAMESPACE","value":"helm-base"},{"name":"REQ_URL","value":"http://localhost:8080/reload-configuration-as-code/?casc-reload-token=$(POD_NAME)"},{"name":"REQ_METHOD","value":"POST"},{"name":"REQ_RETRY_CONNECT","value":"10"}],"image":"kiwigrid/k8s-sidecar:1.12.2","imagePullPolicy":"IfNotPresent","name":"config-reload","resources":{},"volumeMounts":[{"mountPath":"/var/jenkins_home/casc_configs","name":"sc-config-volume"},{"mountPath":"/var/jenkins_home","name":"jenkins-home"}]}],"initContainers":[{"command":["sh","/var/jenkins_config/apply_config.sh"],"image":"jenkins/jenkins:2.303.1-jdk11","imagePullPolicy":"Always","name":"init","resources":{"limits":{"cpu":"2000m","memory":"4096Mi"},"requests":{"cpu":"50m","memory":"256Mi"}},"volumeMounts":[{"mountPath":"/var/jenkins_home","name":"jenkins-home"},{"mountPath":"/var/jenkins_config","name":"jenkins-config"},{"mountPath":"/usr/share/jenkins/ref/plugins","name":"plugins"},{"mountPath":"/var/jenkins_plugins","name":"plugin-dir"}]}],"securityContext":{"fsGroup":1000,"runAsNonRoot":true,"runAsUser":1000},"serviceAccountName":"gke-tom-jenkins","volumes":[{"emptyDir":{},"name":"plugins"},{"configMap":{"name":"gke-tom-jenkins"},"name":"jenkins-config"},{"emptyDir":{},"name":"plugin-dir"},{"name":"jenkins-home","persistentVolumeClaim":{"claimName":"gke-tom-jenkins"}},{"emptyDir":{},"name":"sc-config-volume"},{"name":"admin-secret","secret":{"secretName":"gke-tom-jenkins"}}]}}}}
     labels:
       app.kubernetes.io/component: jenkins-controller
-      app.kubernetes.io/instance: helm-base
+      app.kubernetes.io/instance: tom
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: jenkins
       helm.sh/chart: jenkins-3.5.18
-    name: helm-base-jenkins
+    name: gke-tom-jenkins
     namespace: services
   spec:
     replicas: 1
     selector:
       matchLabels:
         app.kubernetes.io/component: jenkins-controller
-        app.kubernetes.io/instance: helm-base
-    serviceName: helm-base-jenkins
+        app.kubernetes.io/instance: tom
+    serviceName: gke-tom-jenkins
     template:
       metadata:
         annotations:
-          checksum/config: 0aade9d4c5941fbb7dcb3cf4228675152fcd9db47a82d4a6ef8e58afc7321378
+          checksum/config: 6e59b21e88943eb94337411fc892bc745e43a1becc8e20433471e8f3cbafb226
         labels:
           app.kubernetes.io/component: jenkins-controller
-          app.kubernetes.io/instance: helm-base
+          app.kubernetes.io/instance: tom
           app.kubernetes.io/managed-by: Helm
           app.kubernetes.io/name: jenkins
       spec:
@@ -427,7 +427,7 @@ items:
               fieldRef:
                 fieldPath: metadata.name
           - name: LABEL
-            value: helm-base-jenkins-jenkins-config
+            value: tom-jenkins-jenkins-config
           - name: FOLDER
             value: /var/jenkins_home/casc_configs
           - name: NAMESPACE
@@ -474,31 +474,31 @@ items:
           fsGroup: 1000
           runAsNonRoot: true
           runAsUser: 1000
-        serviceAccountName: helm-base-jenkins
+        serviceAccountName: gke-tom-jenkins
         volumes:
         - emptyDir: {}
           name: plugins
         - configMap:
-            name: helm-base-jenkins
+            name: gke-tom-jenkins
           name: jenkins-config
         - emptyDir: {}
           name: plugin-dir
         - name: jenkins-home
           persistentVolumeClaim:
-            claimName: helm-base-jenkins
+            claimName: gke-tom-jenkins
         - emptyDir: {}
           name: sc-config-volume
         - name: admin-secret
           secret:
-            secretName: helm-base-jenkins
+            secretName: gke-tom-jenkins
 - apiVersion: v1
   kind: Pod
   metadata:
     annotations:
       helm.sh/hook: test-success
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{"helm.sh/hook":"test-success"},"name":"helm-base-ui-test-gp2wk","namespace":"services"},"spec":{"containers":[{"command":["/tools/bats/bin/bats","-t","/tests/run.sh"],"image":"jenkins/jenkins:2.303.1-jdk11","name":"helm-base-ui-test","volumeMounts":[{"mountPath":"/tests","name":"tests","readOnly":true},{"mountPath":"/tools","name":"tools"}]}],"initContainers":[{"args":["# copy bats to tools dir\nset -ex\ncp -R /opt/bats /tools/bats/\n"],"command":["bash","-c"],"image":"bats/bats:1.2.1","name":"test-framework","volumeMounts":[{"mountPath":"/tools","name":"tools"}]}],"restartPolicy":"Never","volumes":[{"configMap":{"name":"helm-base-jenkins-tests"},"name":"tests"},{"emptyDir":{},"name":"tools"}]}}
-    name: helm-base-ui-test-gp2wk
+        {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{"helm.sh/hook":"test-success"},"name":"gke-tom-ui-test-z1tcl","namespace":"services"},"spec":{"containers":[{"command":["/tools/bats/bin/bats","-t","/tests/run.sh"],"image":"jenkins/jenkins:2.303.1-jdk11","name":"tom-ui-test","volumeMounts":[{"mountPath":"/tests","name":"tests","readOnly":true},{"mountPath":"/tools","name":"tools"}]}],"initContainers":[{"args":["# copy bats to tools dir\nset -ex\ncp -R /opt/bats /tools/bats/\n"],"command":["bash","-c"],"image":"bats/bats:1.2.1","name":"test-framework","volumeMounts":[{"mountPath":"/tools","name":"tools"}]}],"restartPolicy":"Never","volumes":[{"configMap":{"name":"gke-tom-jenkins-tests"},"name":"tests"},{"emptyDir":{},"name":"tools"}]}}
+    name: gke-tom-ui-test-z1tcl
     namespace: services
   spec:
     containers:
@@ -507,7 +507,7 @@ items:
       - -t
       - /tests/run.sh
       image: jenkins/jenkins:2.303.1-jdk11
-      name: helm-base-ui-test
+      name: tom-ui-test
       volumeMounts:
       - mountPath: /tests
         name: tests
@@ -531,7 +531,7 @@ items:
     restartPolicy: Never
     volumes:
     - configMap:
-        name: helm-base-jenkins-tests
+        name: gke-tom-jenkins-tests
       name: tests
     - emptyDir: {}
       name: tools
