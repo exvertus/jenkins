@@ -6,7 +6,7 @@ Dotted lines indicate inheritance:
 jenkins
 ├── helm-base ╍╍╍╍╷
 └── overlays      ╎
-    └── tom-gke ╍╍╵
+    └── gke-tom ╍╍╵
 ```
 
 ### How to...
@@ -17,7 +17,7 @@ jenkins
   * Follow instructions for installing [helm from script](https://helm.sh/docs/intro/install/#from-script)
   * `helm repo add jenkins https://charts.jenkins.io`
   * `helm repo update`
-  * `helm template helm-base jenkins/jenkins -n helm-base > helm-base/jenkins.yaml`
+  * `helm template tom jenkins/jenkins -n helm-base > helm-base/jenkins.yaml`
   * Helm-base test deployment
     * `kubectl apply -k ./helm-base`
     * `kubectl get pods -n helm-base`
