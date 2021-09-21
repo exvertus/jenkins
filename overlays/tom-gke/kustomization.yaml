@@ -6,3 +6,10 @@ resources:
 patchesStrategicMerge:
   - nodeport-patch.yaml
   - backend-annotation-patch.yaml
+
+configMapGenerator:
+  - name: gke-tom-jenkins-jenkins-jcasc-config
+    namespace: helm-base
+    behavior: merge
+    files:
+      - jcasc-default-config.yaml=jcasc.yaml

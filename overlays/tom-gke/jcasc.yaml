@@ -1,0 +1,24 @@
+jenkins:
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  disableRememberMe: false
+  markupFormatter: "plainText"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  mode: NORMAL
+  numExecutors: 0
+  projectNamingStrategy: "standard"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+unclassified:
+  location:
+    adminAddress: "tflanig1@gmail.com"
+    url: https://services.thomasflanigan.com/
