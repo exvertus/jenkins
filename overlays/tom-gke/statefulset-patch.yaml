@@ -10,6 +10,7 @@ spec:
         - name: config-reload
           env:
             - name: NAMESPACE
+              value: ""
               valueFrom: 
                 fieldRef:
                   fieldPath: metadata.namespace
