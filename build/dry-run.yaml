@@ -285,10 +285,12 @@ items:
   kind: Service
   metadata:
     annotations:
+      beta.cloud.google.com/backend-config: '{"default": "svcs-ingress-be"}'
       cloud.google.com/neg: '{"ingress":true}'
+      cloud.google.com/neg-status: '{"network_endpoint_groups":{"8080":"k8s1-3e771f24-services-gke-tom-jenkins-8080-ecd4af05"},"zones":["us-central1-c"]}'
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins","namespace":"services"},"spec":{"ports":[{"name":"http","port":8080,"targetPort":8080}],"selector":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom"},"type":"NodePort"}}
-    creationTimestamp: "2021-09-20T22:40:47Z"
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"beta.cloud.google.com/backend-config":"{\"default\": \"svcs-ingress-be\"}"},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18"},"name":"gke-tom-jenkins","namespace":"services"},"spec":{"ports":[{"name":"http","port":8080,"targetPort":8080}],"selector":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom"},"type":"NodePort"}}
+    creationTimestamp: "2021-09-20T23:18:38Z"
     labels:
       app.kubernetes.io/component: jenkins-controller
       app.kubernetes.io/instance: tom
@@ -297,16 +299,16 @@ items:
       helm.sh/chart: jenkins-3.5.18
     name: gke-tom-jenkins
     namespace: services
-    resourceVersion: "76625703"
-    uid: d7d1f908-5b24-4fff-a45c-e0c6df42f7bf
+    resourceVersion: "76641547"
+    uid: 1274f53b-00c5-445d-8126-52d7d445342b
   spec:
-    clusterIP: 10.60.15.39
+    clusterIP: 10.60.14.86
     clusterIPs:
-    - 10.60.15.39
+    - 10.60.14.86
     externalTrafficPolicy: Cluster
     ports:
     - name: http
-      nodePort: 32769
+      nodePort: 32403
       port: 8080
       protocol: TCP
       targetPort: 8080
@@ -608,11 +610,10 @@ items:
       helm.sh/hook: test-success
       kubectl.kubernetes.io/last-applied-configuration: |
         {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{"helm.sh/hook":"test-success"},"name":"gke-tom-ui-test-z1tcl","namespace":"services"},"spec":{"containers":[{"command":["/tools/bats/bin/bats","-t","/tests/run.sh"],"image":"jenkins/jenkins:2.303.1-jdk11","name":"tom-ui-test","volumeMounts":[{"mountPath":"/tests","name":"tests","readOnly":true},{"mountPath":"/tools","name":"tools"}]}],"initContainers":[{"args":["# copy bats to tools dir\nset -ex\ncp -R /opt/bats /tools/bats/\n"],"command":["bash","-c"],"image":"bats/bats:1.2.1","name":"test-framework","volumeMounts":[{"mountPath":"/tools","name":"tools"}]}],"restartPolicy":"Never","volumes":[{"configMap":{"name":"gke-tom-jenkins-tests"},"name":"tests"},{"emptyDir":{},"name":"tools"}]}}
-    creationTimestamp: "2021-09-20T22:40:50Z"
+    creationTimestamp: "2021-09-21T00:30:42Z"
     name: gke-tom-ui-test-z1tcl
     namespace: services
-    resourceVersion: "76627390"
-    uid: 360d2638-0695-42ab-8144-0ff8e1ce8af8
+    uid: 429e624a-91f7-4c70-945d-3584d862cc75
   spec:
     containers:
     - command:
@@ -657,7 +658,6 @@ items:
       - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         name: default-token-784b2
         readOnly: true
-    nodeName: gke-maincluster-default-pool-e005f587-xbv1
     preemptionPolicy: PreemptLowerPriority
     priority: 0
     restartPolicy: Never
@@ -687,64 +687,7 @@ items:
         defaultMode: 420
         secretName: default-token-784b2
   status:
-    conditions:
-    - lastProbeTime: null
-      lastTransitionTime: "2021-09-20T22:40:54Z"
-      status: "True"
-      type: Initialized
-    - lastProbeTime: null
-      lastTransitionTime: "2021-09-20T22:49:08Z"
-      message: 'containers with unready status: [tom-ui-test]'
-      reason: ContainersNotReady
-      status: "False"
-      type: Ready
-    - lastProbeTime: null
-      lastTransitionTime: "2021-09-20T22:49:08Z"
-      message: 'containers with unready status: [tom-ui-test]'
-      reason: ContainersNotReady
-      status: "False"
-      type: ContainersReady
-    - lastProbeTime: null
-      lastTransitionTime: "2021-09-20T22:40:51Z"
-      status: "True"
-      type: PodScheduled
-    containerStatuses:
-    - containerID: containerd://7f8afebc729b965e64ec258b4fffc1418206136a90644683623dd82509204543
-      image: docker.io/jenkins/jenkins:2.303.1-jdk11
-      imageID: docker.io/jenkins/jenkins@sha256:a942c30fc3bcf269a1c32ba27eb4a470148eff9aba086911320031a3c3943e6c
-      lastState: {}
-      name: tom-ui-test
-      ready: false
-      restartCount: 0
-      started: false
-      state:
-        terminated:
-          containerID: containerd://7f8afebc729b965e64ec258b4fffc1418206136a90644683623dd82509204543
-          exitCode: 1
-          finishedAt: "2021-09-20T22:49:07Z"
-          reason: Error
-          startedAt: "2021-09-20T22:40:54Z"
-    hostIP: 10.128.0.12
-    initContainerStatuses:
-    - containerID: containerd://092919721503ae5a48cdd12d4265da0d099b8989c4f1255ceabe5a0b1dac5ad3
-      image: docker.io/bats/bats:1.2.1
-      imageID: docker.io/bats/bats@sha256:2defd45426be3b5bc7415455ca529c910dab7473717eeece9c3cc26efa5ca037
-      lastState: {}
-      name: test-framework
-      ready: true
-      restartCount: 0
-      state:
-        terminated:
-          containerID: containerd://092919721503ae5a48cdd12d4265da0d099b8989c4f1255ceabe5a0b1dac5ad3
-          exitCode: 0
-          finishedAt: "2021-09-20T22:40:54Z"
-          reason: Completed
-          startedAt: "2021-09-20T22:40:54Z"
-    phase: Failed
-    podIP: 10.56.0.13
-    podIPs:
-    - ip: 10.56.0.13
+    phase: Pending
     qosClass: BestEffort
-    startTime: "2021-09-20T22:40:52Z"
 kind: List
 metadata: {}
