@@ -3,6 +3,9 @@ namespace: services
 resources:
   - ../../helm-base
 
+patches:
+- path: statefulset-patch.yaml
+
 patchesStrategicMerge:
   - nodeport-patch.yaml
   - backend-annotation-patch.yaml
