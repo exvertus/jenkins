@@ -199,14 +199,13 @@ items:
       app.kubernetes.io/name: jenkins
     name: gke-tom-jenkins
     namespace: services
-    resourceVersion: "76625673"
+    resourceVersion: "77158833"
     uid: 157827a9-05e8-4222-92ae-42bf242a4b26
 - apiVersion: v1
   data:
     jcasc-default-config.yaml: |
       jenkins:
         authorizationStrategy:
-          authorizationStrategy:
           globalMatrix:
             permissions:
             - "Overall/Read:authenticated"
@@ -241,7 +240,7 @@ items:
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","data":{"jcasc-default-config.yaml":"jenkins:\n  authorizationStrategy:\n    authorizationStrategy:\n    globalMatrix:\n      permissions:\n      - \"Overall/Read:authenticated\"\n      - \"Credentials/View:authenticated\"\n      - \"Job/Build:authenticated\"\n      - \"Job/Cancel:authenticated\"\n      - \"Job/Read:authenticated\"\n      - \"Run/Update:authenticated\"\n      - \"View/Read:authenticated\"\n      - \"Overall/Administer:tflanig1@gmail.com\"\n  crumbIssuer:\n    standard:\n      excludeClientIPFromCrumb: false\n  disableRememberMe: false\n  markupFormatter: \"plainText\"\n  quietPeriod: 5\n  remotingSecurity:\n    enabled: true\n  mode: NORMAL\n  numExecutors: 0\n  projectNamingStrategy: \"standard\"\nsecurity:\n  apiToken:\n    creationOfLegacyTokenEnabled: false\n    tokenGenerationOnCreationEnabled: false\n    usageStatisticsEnabled: true\nunclassified:\n  location:\n    adminAddress: \"tflanig1@gmail.com\"\n    url: https://services.thomasflanigan.com/\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18","tom-jenkins-jenkins-config":"true"},"name":"gke-tom-jenkins-jenkins-jcasc-config","namespace":"services"}}
+        {"apiVersion":"v1","data":{"jcasc-default-config.yaml":"jenkins:\n  authorizationStrategy:\n    globalMatrix:\n      permissions:\n      - \"Overall/Read:authenticated\"\n      - \"Credentials/View:authenticated\"\n      - \"Job/Build:authenticated\"\n      - \"Job/Cancel:authenticated\"\n      - \"Job/Read:authenticated\"\n      - \"Run/Update:authenticated\"\n      - \"View/Read:authenticated\"\n      - \"Overall/Administer:tflanig1@gmail.com\"\n  crumbIssuer:\n    standard:\n      excludeClientIPFromCrumb: false\n  disableRememberMe: false\n  markupFormatter: \"plainText\"\n  quietPeriod: 5\n  remotingSecurity:\n    enabled: true\n  mode: NORMAL\n  numExecutors: 0\n  projectNamingStrategy: \"standard\"\nsecurity:\n  apiToken:\n    creationOfLegacyTokenEnabled: false\n    tokenGenerationOnCreationEnabled: false\n    usageStatisticsEnabled: true\nunclassified:\n  location:\n    adminAddress: \"tflanig1@gmail.com\"\n    url: https://services.thomasflanigan.com/\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18","tom-jenkins-jenkins-config":"true"},"name":"gke-tom-jenkins-jenkins-jcasc-config","namespace":"services"}}
     creationTimestamp: "2021-09-20T22:40:44Z"
     labels:
       app.kubernetes.io/component: jenkins-controller
@@ -252,7 +251,7 @@ items:
       tom-jenkins-jenkins-config: "true"
     name: gke-tom-jenkins-jenkins-jcasc-config
     namespace: services
-    resourceVersion: "77119965"
+    resourceVersion: "77158834"
     uid: b68d955b-f824-431c-b5f4-9a3e162ee960
 - apiVersion: v1
   data:
@@ -417,7 +416,7 @@ items:
       helm.sh/chart: jenkins-3.5.18
     name: gke-tom-jenkins
     namespace: services
-    resourceVersion: "77146863"
+    resourceVersion: "77159116"
     uid: e63e16fc-4544-4899-b1a3-0bb7959ff061
   spec:
     podManagementPolicy: OrderedReady
@@ -613,7 +612,6 @@ items:
     currentReplicas: 1
     currentRevision: gke-tom-jenkins-6d9b9f6968
     observedGeneration: 3
-    readyReplicas: 1
     replicas: 1
     updateRevision: gke-tom-jenkins-6d9b9f6968
     updatedReplicas: 1

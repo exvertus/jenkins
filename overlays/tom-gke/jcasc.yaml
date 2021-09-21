@@ -1,6 +1,5 @@
 jenkins:
   authorizationStrategy:
-    authorizationStrategy:
     globalMatrix:
       permissions:
       - "Overall/Read:authenticated"
