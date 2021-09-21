@@ -299,7 +299,7 @@ items:
       helm.sh/chart: jenkins-3.5.18
     name: gke-tom-jenkins
     namespace: services
-    resourceVersion: "76641547"
+    resourceVersion: "76701989"
     uid: 1274f53b-00c5-445d-8126-52d7d445342b
   spec:
     clusterIP: 10.60.14.86
@@ -610,10 +610,11 @@ items:
       helm.sh/hook: test-success
       kubectl.kubernetes.io/last-applied-configuration: |
         {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{"helm.sh/hook":"test-success"},"name":"gke-tom-ui-test-z1tcl","namespace":"services"},"spec":{"containers":[{"command":["/tools/bats/bin/bats","-t","/tests/run.sh"],"image":"jenkins/jenkins:2.303.1-jdk11","name":"tom-ui-test","volumeMounts":[{"mountPath":"/tests","name":"tests","readOnly":true},{"mountPath":"/tools","name":"tools"}]}],"initContainers":[{"args":["# copy bats to tools dir\nset -ex\ncp -R /opt/bats /tools/bats/\n"],"command":["bash","-c"],"image":"bats/bats:1.2.1","name":"test-framework","volumeMounts":[{"mountPath":"/tools","name":"tools"}]}],"restartPolicy":"Never","volumes":[{"configMap":{"name":"gke-tom-jenkins-tests"},"name":"tests"},{"emptyDir":{},"name":"tools"}]}}
-    creationTimestamp: "2021-09-21T00:30:42Z"
+    creationTimestamp: "2021-09-21T00:34:50Z"
     name: gke-tom-ui-test-z1tcl
     namespace: services
-    uid: 429e624a-91f7-4c70-945d-3584d862cc75
+    resourceVersion: "76668281"
+    uid: e30f5e09-9d58-4f7b-bc1d-2eb6bd7adfeb
   spec:
     containers:
     - command:
@@ -658,6 +659,7 @@ items:
       - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
         name: default-token-784b2
         readOnly: true
+    nodeName: gke-maincluster-default-pool-e005f587-xbv1
     preemptionPolicy: PreemptLowerPriority
     priority: 0
     restartPolicy: Never
@@ -687,7 +689,64 @@ items:
         defaultMode: 420
         secretName: default-token-784b2
   status:
-    phase: Pending
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2021-09-21T00:34:53Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2021-09-21T00:42:57Z"
+      message: 'containers with unready status: [tom-ui-test]'
+      reason: ContainersNotReady
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2021-09-21T00:42:57Z"
+      message: 'containers with unready status: [tom-ui-test]'
+      reason: ContainersNotReady
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2021-09-21T00:34:50Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://38ec4de24f50317a80b5e40b1e4c4b58111584493fe94a3c7f1392f193defb95
+      image: docker.io/jenkins/jenkins:2.303.1-jdk11
+      imageID: docker.io/jenkins/jenkins@sha256:a942c30fc3bcf269a1c32ba27eb4a470148eff9aba086911320031a3c3943e6c
+      lastState: {}
+      name: tom-ui-test
+      ready: false
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: containerd://38ec4de24f50317a80b5e40b1e4c4b58111584493fe94a3c7f1392f193defb95
+          exitCode: 1
+          finishedAt: "2021-09-21T00:42:57Z"
+          reason: Error
+          startedAt: "2021-09-21T00:34:53Z"
+    hostIP: 10.128.0.12
+    initContainerStatuses:
+    - containerID: containerd://7b0a07eae0a84997dbf553f2457624285459e6c2751ab124244428f4eff42e9d
+      image: docker.io/bats/bats:1.2.1
+      imageID: docker.io/bats/bats@sha256:2defd45426be3b5bc7415455ca529c910dab7473717eeece9c3cc26efa5ca037
+      lastState: {}
+      name: test-framework
+      ready: true
+      restartCount: 0
+      state:
+        terminated:
+          containerID: containerd://7b0a07eae0a84997dbf553f2457624285459e6c2751ab124244428f4eff42e9d
+          exitCode: 0
+          finishedAt: "2021-09-21T00:34:53Z"
+          reason: Completed
+          startedAt: "2021-09-21T00:34:53Z"
+    phase: Failed
+    podIP: 10.56.0.15
+    podIPs:
+    - ip: 10.56.0.15
     qosClass: BestEffort
+    startTime: "2021-09-21T00:34:50Z"
 kind: List
 metadata: {}
