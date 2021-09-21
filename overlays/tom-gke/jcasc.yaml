@@ -1,7 +1,16 @@
 jenkins:
   authorizationStrategy:
-    loggedInUsersCanDoAnything:
-      allowAnonymousRead: false
+    authorizationStrategy:
+    globalMatrix:
+      permissions:
+      - "Overall/Read:authenticated"
+      - "Credentials/View:authenticated"
+      - "Job/Build:authenticated"
+      - "Job/Cancel:authenticated"
+      - "Job/Read:authenticated"
+      - "Run/Update:authenticated"
+      - "View/Read:authenticated"
+      - "Overall/Administer:tflanig1@gmail.com"
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: false

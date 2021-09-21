@@ -175,15 +175,22 @@ items:
       yes n | cp -i /usr/share/jenkins/ref/plugins/* /var/jenkins_plugins/;
       echo "finished initialization"
     plugins.txt: |-
-      kubernetes:1.30.1
-      workflow-aggregator:2.6
-      git:4.8.2
-      configuration-as-code:1.52
+      audit-trail:latest
+      build-history-metrics-plugin:latest
+      configuration-as-code:latest
+      credentials-binding:latest
+      git:latest
+      google-login:latest
+      google-metadata-plugin:latest
+      google-oauth-plugin:latest
+      kubernetes:latest
+      workflow-job:latest
+      workflow-aggregator:latest
   kind: ConfigMap
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","data":{"apply_config.sh":"set -e\necho \"disable Setup Wizard\"\n# Prevent Setup Wizard when JCasC is enabled\necho $JENKINS_VERSION \u003e /var/jenkins_home/jenkins.install.UpgradeWizard.state\necho $JENKINS_VERSION \u003e /var/jenkins_home/jenkins.install.InstallUtil.lastExecVersion\necho \"download plugins\"\n# Install missing plugins\ncp /var/jenkins_config/plugins.txt /var/jenkins_home;\nrm -rf /usr/share/jenkins/ref/plugins/*.lock\nversion () { echo \"$@\" | awk -F. '{ printf(\"%d%03d%03d%03d\\n\", $1,$2,$3,$4); }'; }\nif [ -f \"/usr/share/jenkins/jenkins.war\" ] \u0026\u0026 [ -n \"$(command -v jenkins-plugin-cli)\" 2\u003e/dev/null ] \u0026\u0026 [ $(version $(jenkins-plugin-cli --version)) -ge $(version \"2.1.1\") ]; then\n  jenkins-plugin-cli --verbose --war \"/usr/share/jenkins/jenkins.war\" --plugin-file \"/var/jenkins_home/plugins.txt\" --latest true;\nelse\n  /usr/local/bin/install-plugins.sh `echo $(cat /var/jenkins_home/plugins.txt)`;\nfi\necho \"copy plugins to shared volume\"\n# Copy plugins to shared volume\nyes n | cp -i /usr/share/jenkins/ref/plugins/* /var/jenkins_plugins/;\necho \"finished initialization\"","plugins.txt":"kubernetes:1.30.1\nworkflow-aggregator:2.6\ngit:4.8.2\nconfiguration-as-code:1.52"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins"},"name":"gke-tom-jenkins","namespace":"services"}}
+        {"apiVersion":"v1","data":{"apply_config.sh":"set -e\necho \"disable Setup Wizard\"\n# Prevent Setup Wizard when JCasC is enabled\necho $JENKINS_VERSION \u003e /var/jenkins_home/jenkins.install.UpgradeWizard.state\necho $JENKINS_VERSION \u003e /var/jenkins_home/jenkins.install.InstallUtil.lastExecVersion\necho \"download plugins\"\n# Install missing plugins\ncp /var/jenkins_config/plugins.txt /var/jenkins_home;\nrm -rf /usr/share/jenkins/ref/plugins/*.lock\nversion () { echo \"$@\" | awk -F. '{ printf(\"%d%03d%03d%03d\\n\", $1,$2,$3,$4); }'; }\nif [ -f \"/usr/share/jenkins/jenkins.war\" ] \u0026\u0026 [ -n \"$(command -v jenkins-plugin-cli)\" 2\u003e/dev/null ] \u0026\u0026 [ $(version $(jenkins-plugin-cli --version)) -ge $(version \"2.1.1\") ]; then\n  jenkins-plugin-cli --verbose --war \"/usr/share/jenkins/jenkins.war\" --plugin-file \"/var/jenkins_home/plugins.txt\" --latest true;\nelse\n  /usr/local/bin/install-plugins.sh `echo $(cat /var/jenkins_home/plugins.txt)`;\nfi\necho \"copy plugins to shared volume\"\n# Copy plugins to shared volume\nyes n | cp -i /usr/share/jenkins/ref/plugins/* /var/jenkins_plugins/;\necho \"finished initialization\"","plugins.txt":"audit-trail:latest\nbuild-history-metrics-plugin:latest\nconfiguration-as-code:latest\ncredentials-binding:latest\ngit:latest\ngoogle-login:latest\ngoogle-metadata-plugin:latest\ngoogle-oauth-plugin:latest\nkubernetes:latest\nworkflow-job:latest\nworkflow-aggregator:latest"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins"},"name":"gke-tom-jenkins","namespace":"services"}}
     creationTimestamp: "2021-09-20T22:40:44Z"
     labels:
       app.kubernetes.io/component: jenkins-controller
@@ -199,8 +206,17 @@ items:
     jcasc-default-config.yaml: |
       jenkins:
         authorizationStrategy:
-          loggedInUsersCanDoAnything:
-            allowAnonymousRead: false
+          authorizationStrategy:
+          globalMatrix:
+            permissions:
+            - "Overall/Read:authenticated"
+            - "Credentials/View:authenticated"
+            - "Job/Build:authenticated"
+            - "Job/Cancel:authenticated"
+            - "Job/Read:authenticated"
+            - "Run/Update:authenticated"
+            - "View/Read:authenticated"
+            - "Overall/Administer:tflanig1@gmail.com"
         crumbIssuer:
           standard:
             excludeClientIPFromCrumb: false
@@ -225,7 +241,7 @@ items:
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","data":{"jcasc-default-config.yaml":"jenkins:\n  authorizationStrategy:\n    loggedInUsersCanDoAnything:\n      allowAnonymousRead: false\n  crumbIssuer:\n    standard:\n      excludeClientIPFromCrumb: false\n  disableRememberMe: false\n  markupFormatter: \"plainText\"\n  quietPeriod: 5\n  remotingSecurity:\n    enabled: true\n  mode: NORMAL\n  numExecutors: 0\n  projectNamingStrategy: \"standard\"\nsecurity:\n  apiToken:\n    creationOfLegacyTokenEnabled: false\n    tokenGenerationOnCreationEnabled: false\n    usageStatisticsEnabled: true\nunclassified:\n  location:\n    adminAddress: \"tflanig1@gmail.com\"\n    url: https://services.thomasflanigan.com/\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18","tom-jenkins-jenkins-config":"true"},"name":"gke-tom-jenkins-jenkins-jcasc-config","namespace":"services"}}
+        {"apiVersion":"v1","data":{"jcasc-default-config.yaml":"jenkins:\n  authorizationStrategy:\n    authorizationStrategy:\n    globalMatrix:\n      permissions:\n      - \"Overall/Read:authenticated\"\n      - \"Credentials/View:authenticated\"\n      - \"Job/Build:authenticated\"\n      - \"Job/Cancel:authenticated\"\n      - \"Job/Read:authenticated\"\n      - \"Run/Update:authenticated\"\n      - \"View/Read:authenticated\"\n      - \"Overall/Administer:tflanig1@gmail.com\"\n  crumbIssuer:\n    standard:\n      excludeClientIPFromCrumb: false\n  disableRememberMe: false\n  markupFormatter: \"plainText\"\n  quietPeriod: 5\n  remotingSecurity:\n    enabled: true\n  mode: NORMAL\n  numExecutors: 0\n  projectNamingStrategy: \"standard\"\nsecurity:\n  apiToken:\n    creationOfLegacyTokenEnabled: false\n    tokenGenerationOnCreationEnabled: false\n    usageStatisticsEnabled: true\nunclassified:\n  location:\n    adminAddress: \"tflanig1@gmail.com\"\n    url: https://services.thomasflanigan.com/\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app.kubernetes.io/component":"jenkins-controller","app.kubernetes.io/instance":"tom","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"jenkins","helm.sh/chart":"jenkins-3.5.18","tom-jenkins-jenkins-config":"true"},"name":"gke-tom-jenkins-jenkins-jcasc-config","namespace":"services"}}
     creationTimestamp: "2021-09-20T22:40:44Z"
     labels:
       app.kubernetes.io/component: jenkins-controller
@@ -401,7 +417,7 @@ items:
       helm.sh/chart: jenkins-3.5.18
     name: gke-tom-jenkins
     namespace: services
-    resourceVersion: "77138781"
+    resourceVersion: "77146863"
     uid: e63e16fc-4544-4899-b1a3-0bb7959ff061
   spec:
     podManagementPolicy: OrderedReady
@@ -594,10 +610,13 @@ items:
       type: RollingUpdate
   status:
     collisionCount: 0
-    currentRevision: gke-tom-jenkins-6469b55f7f
-    observedGeneration: 2
+    currentReplicas: 1
+    currentRevision: gke-tom-jenkins-6d9b9f6968
+    observedGeneration: 3
+    readyReplicas: 1
     replicas: 1
-    updateRevision: gke-tom-jenkins-6c4d4857cc
+    updateRevision: gke-tom-jenkins-6d9b9f6968
+    updatedReplicas: 1
 - apiVersion: v1
   kind: Pod
   metadata:

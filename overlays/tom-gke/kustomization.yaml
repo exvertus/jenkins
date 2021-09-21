@@ -4,6 +4,10 @@ resources:
   - ../../helm-base
 
 patches:
+- target:
+    kind: ConfigMap
+    name: tom-jenkins
+  path: plugins.yaml
 - path: statefulset-patch.yaml
 
 patchesStrategicMerge:
