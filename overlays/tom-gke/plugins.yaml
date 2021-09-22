@@ -1,0 +1,15 @@
+- op: replace
+  path: /data/plugins.txt
+  value: |-
+    audit-trail:latest
+    build-history-metrics-plugin:latest
+    configuration-as-code:latest
+    credentials-binding:latest
+    git:latest
+    google-login:latest
+    google-metadata-plugin:latest
+    google-oauth-plugin:latest
+    kubernetes:latest
+    matrix-auth:latest
+    workflow-job:latest
+    workflow-aggregator:latest

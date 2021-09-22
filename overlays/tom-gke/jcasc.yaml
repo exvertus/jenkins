@@ -1,0 +1,36 @@
+jenkins:
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+      - "Overall/Read:authenticated"
+      - "Credentials/View:authenticated"
+      - "Job/Build:authenticated"
+      - "Job/Cancel:authenticated"
+      - "Job/Read:authenticated"
+      - "Run/Update:authenticated"
+      - "View/Read:authenticated"
+      - "Overall/Administer:tflanig1@gmail.com"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  disableRememberMe: false
+  markupFormatter: "plainText"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  mode: NORMAL
+  numExecutors: 0
+  projectNamingStrategy: "standard"
+  securityRealm:
+    googleOAuth2:
+      clientId: "${jenkins-auth/client-id}"
+      clientSecret: "${jenkins-auth/client-secret}"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+unclassified:
+  location:
+    adminAddress: "tflanig1@gmail.com"
+    url: https://services.thomasflanigan.com/

@@ -3,6 +3,25 @@ namespace: services
 resources:
   - ../../helm-base
 
+patches:
+- target:
+    kind: ConfigMap
+    name: tom-jenkins
+  path: plugins.yaml
+- path: statefulset-patch.yaml
+
 patchesStrategicMerge:
   - nodeport-patch.yaml
   - backend-annotation-patch.yaml
+
+configMapGenerator:
+  - name: tom-jenkins-jenkins-jcasc-config
+    namespace: helm-base
+    behavior: merge
+    files:
+      - jcasc-default-config.yaml=jcasc.yaml
+
+secretGenerator:
+- name: tom-jenkins-auth
+  envs: 
+  - jenkins-auth.env
