@@ -23,10 +23,8 @@ jenkins:
   projectNamingStrategy: "standard"
   securityRealm:
     googleOAuth2:
-      clientId: "${jenkins-auth-client-id}"
-      clientSecret: "${jenkins-auth-client-secret}"
-      domain: "services.thomasflanigan.com"
-      rootURLFromRequest: true
+      clientId: "${jenkins-auth/client-id}"
+      clientSecret: "${jenkins-auth/client-secret}"
 security:
   apiToken:
     creationOfLegacyTokenEnabled: false
