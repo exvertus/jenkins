@@ -7,6 +7,11 @@ spec:
   template:
     spec:
       containers:
+        - name: jenkins
+          volumeMounts:
+            - mountPath: /run/secrets
+              name: jenkins-auth
+              readOnly: true
         - name: config-reload
           env:
             - name: NAMESPACE
@@ -14,3 +19,7 @@ spec:
               valueFrom: 
                 fieldRef:
                   fieldPath: metadata.namespace
+      volumes:
+        - name: jenkins-auth
+          secret:
+            secretName: gke-tom-jenkins-auth

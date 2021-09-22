@@ -20,3 +20,8 @@ configMapGenerator:
     behavior: merge
     files:
       - jcasc-default-config.yaml=jcasc.yaml
+
+secretGenerator:
+- name: tom-jenkins-auth
+  envs: 
+  - jenkins-auth.env

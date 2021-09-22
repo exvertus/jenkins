@@ -21,6 +21,12 @@ jenkins:
   mode: NORMAL
   numExecutors: 0
   projectNamingStrategy: "standard"
+  securityRealm:
+    googleOAuth2:
+      clientId: "${jenkins-auth-client-id}"
+      clientSecret: "${jenkins-auth-client-secret}"
+      domain: "services.thomasflanigan.com"
+      rootURLFromRequest: true
 security:
   apiToken:
     creationOfLegacyTokenEnabled: false
