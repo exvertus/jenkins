@@ -9,7 +9,7 @@ spec:
       containers:
         - name: jenkins
           volumeMounts:
-            - mountPath: /run/secrets
+            - mountPath: /run/secrets/jenkins-auth
               name: jenkins-auth
               readOnly: true
         - name: config-reload
