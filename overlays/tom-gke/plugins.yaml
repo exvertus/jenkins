@@ -10,5 +10,6 @@
     google-metadata-plugin:latest
     google-oauth-plugin:latest
     kubernetes:latest
+    matrix-auth:latest
     workflow-job:latest
     workflow-aggregator:latest
