@@ -2,7 +2,7 @@ namePrefix: gke-
 namespace: services
 resources:
   - ../../helm-base
-  - namespaces.yaml
+  - agent-service-account.yaml
 
 patches:
 - target:
