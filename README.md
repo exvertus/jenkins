@@ -16,7 +16,7 @@ jenkins
 * Deploy changes: `kubectl apply -k ./overlays/tom-gke`
 * Print out applied yaml to build folder: `kubectl apply -k ./overlays/tom-gke --dry-run=server -o yaml > build/dry-run.yaml`
 * Update base from helm in cloud shell
-  * Set env var HELM_INSTALL_DIR to your home directory
+  * Set env var HELM_INSTALL_DIR to your home directory (TODO: script this)
   * Follow instructions for installing [helm from script](https://helm.sh/docs/intro/install/#from-script)
   * `helm repo add jenkins https://charts.jenkins.io`
   * `helm repo update`
