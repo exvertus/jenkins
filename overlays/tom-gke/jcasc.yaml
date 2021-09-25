@@ -2,14 +2,18 @@ jenkins:
   authorizationStrategy:
     globalMatrix:
       permissions:
-      - "Overall/Read:authenticated"
-      - "Credentials/View:authenticated"
-      - "Job/Build:authenticated"
-      - "Job/Cancel:authenticated"
-      - "Job/Read:authenticated"
-      - "Run/Update:authenticated"
-      - "View/Read:authenticated"
-      - "Overall/Administer:tflanig1@gmail.com"
+        - "Credentials/View:authenticated"
+        - "Job/Build:authenticated"
+        - "Job/Cancel:authenticated"
+        - "Job/Read:authenticated"
+        - "Overall/Read:anonymous"
+        - "Overall/Read:authenticated"
+        - "Run/Update:authenticated"
+        - "View/Configure:authenticated"
+        - "View/Create:authenticated"
+        - "View/Delete:authenticated"
+        - "View/Read:authenticated"
+        - "Overall/Administer:exvertus"
   clouds:
   - kubernetes:
       containerCap: 10
@@ -54,9 +58,12 @@ jenkins:
   numExecutors: 0
   projectNamingStrategy: "standard"
   securityRealm:
-    googleOAuth2:
-      clientId: "${jenkins-auth/client-id}"
+    github:
+      clientID: "${jenkins-auth/client-id}"
       clientSecret: "${jenkins-auth/client-secret}"
+      githubApiUri: "https://api.github.com"
+      githubWebUri: "https://github.com"
+      oauthScopes: "read:org,user:email,repo"
 security:
   apiToken:
     creationOfLegacyTokenEnabled: false
