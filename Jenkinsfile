@@ -19,7 +19,7 @@ spec:
     stages {
         stage('Main') {
             steps {
-                echo "Confirming code added to github works!"
+                echo "TODO: replace this with a real job that builds the k8s yaml."
             }
         }
     }
