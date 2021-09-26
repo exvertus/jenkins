@@ -1,3 +1,21 @@
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - fileSystemServiceAccountCredential:
+              id: "${jenkins-auth/service-account-id}"
+              scope: GLOBAL
+          - string:
+              description: "Tom's personal access token for github (exp 9/24/22)"
+              id: "exvertus-github-token"
+              scope: GLOBAL
+              secret: "${jenkins-auth/exvertus-github-token}"
+          - usernamePassword:
+              description: "Github personal access token for exvertus as username with password"
+              id: "exvertus-github-pat-up"
+              password: "${jenkins-auth/exvertus-github-token}"
+              scope: GLOBAL
+              username: "exvertus"
 jenkins:
   authorizationStrategy:
     globalMatrix:
@@ -18,7 +36,7 @@ jenkins:
   - kubernetes:
       containerCap: 10
       containerCapStr: "10"
-      credentialsId: "8088c367-3e37-4795-b7f9-10d4c3dc3ef3"
+      credentialsId: "${jenkins-auth/service-account-id}"
       jenkinsTunnel: "gke-tom-jenkins-agent:50000"
       jenkinsUrl: "http://gke-tom-jenkins:8080"
       name: "kubernetes"
