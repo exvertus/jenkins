@@ -6,6 +6,8 @@
     configuration-as-code:latest
     credentials-binding:latest
     git:latest
+    github:latest
+    github-oauth:latest
     google-login:latest
     google-metadata-plugin:latest
     google-oauth-plugin:latest
