@@ -28,4 +28,6 @@ secretGenerator:
     - jenkins-auth.env
   - name: gcp-sa
     files:
-      - gcp-sa.json=gcp-sa.json
+    - gcp-sa.json=gcp-sa.json
+    options:
+      disableNameSuffixHash: true
