@@ -23,6 +23,11 @@ configMapGenerator:
       - jcasc-default-config.yaml=jcasc.yaml
 
 secretGenerator:
-- name: tom-jenkins-auth
-  envs: 
-  - jenkins-auth.env
+  - name: tom-jenkins-auth
+    envs:
+    - jenkins-auth.env
+  - name: gcp-sa
+    files:
+    - gcp-sa.json=gcp-sa.json
+    options:
+      disableNameSuffixHash: true
