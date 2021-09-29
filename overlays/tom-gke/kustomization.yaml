@@ -3,6 +3,7 @@ namespace: services
 resources:
   - ../../helm-base
   - agent-service-account.yaml
+  - kubectl-service-account.yaml
 
 patches:
 - target:
