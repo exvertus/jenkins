@@ -22,6 +22,10 @@ configMapGenerator:
     behavior: merge
     files:
       - jcasc-default-config.yaml=jcasc.yaml
+  - name: gitwebhookproxy
+    behavior: merge
+    envs:
+    - jenkins.env
 
 secretGenerator:
   - name: tom-jenkins-auth
