@@ -11,6 +11,10 @@ patches:
     name: tom-jenkins
   path: plugins.yaml
 - path: statefulset-patch.yaml
+- target:
+    kind: Service
+    name: gitwebhookproxy
+  path: service-patch.yaml
 
 patchesStrategicMerge:
   - nodeport-patch.yaml
