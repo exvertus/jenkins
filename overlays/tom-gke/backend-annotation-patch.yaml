@@ -4,11 +4,11 @@ metadata:
   name: tom-jenkins
   namespace: helm-base
   annotations:
-    beta.cloud.google.com/backend-config: '{"default": "svcs-ingress-be"}'
+    cloud.google.com/backend-config: '{"default": "svcs-ingress-be"}'
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: gitwebhookproxy
   annotations:
-    beta.cloud.google.com/backend-config: '{"default": "gke-gitwebhookproxy"}'
+    cloud.google.com/backend-config: '{"default": "gke-gitwebhookproxy"}'
