@@ -5,10 +5,10 @@ metadata:
   namespace: helm-base
 spec:
   type: NodePort
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: gitwebhookproxy
-spec:
-  type: NodePort
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: gitwebhookproxy
+# spec:
+#   type: NodePort

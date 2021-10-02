@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # annotations:
+  #   cloud.google.com/backend-config: '{"default": ""}'
+  labels:
+    app.kubernetes.io/component: jenkins-master
+    app.kubernetes.io/instance: jenkins
+    app.kubernetes.io/name: jenkins
+  name: gitwebhookproxy
+spec:
+  ports:
+  - name: http
+    port: 8081
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/component: jenkins-controller
+    app.kubernetes.io/instance: tom
+  type: NodePort
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: gitwebhookproxy
