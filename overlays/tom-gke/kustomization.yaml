@@ -11,6 +11,13 @@ patches:
     name: tom-jenkins
   path: plugins.yaml
 - path: statefulset-patch.yaml
+- target:
+    kind: Service
+    name: gitwebhookproxy
+  patch: |-
+    - op: replace
+      path: /spec/ports/0/port
+      value: 8081
 
 patchesStrategicMerge:
   - nodeport-patch.yaml
@@ -37,5 +44,6 @@ secretGenerator:
     options:
       disableNameSuffixHash: true
   - name: gitwebhookproxy
+    behavior: merge
     envs:
     - gwp-secrets.env
