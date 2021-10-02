@@ -17,8 +17,3 @@ spec:
     app.kubernetes.io/component: jenkins-controller
     app.kubernetes.io/instance: tom
   type: NodePort
----
-apiVersion: cloud.google.com/v1
-kind: BackendConfig
-metadata:
-  name: gitwebhookproxy
