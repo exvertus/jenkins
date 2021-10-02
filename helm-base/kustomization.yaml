@@ -1,4 +1,4 @@
 resources:
 - helm-base.yaml
 - jenkins.yaml
-# - webhook-proxy.yaml
+- webhook-proxy.yaml

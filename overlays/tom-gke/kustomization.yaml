@@ -4,8 +4,6 @@ resources:
   - ../../helm-base
   - agent-service-account.yaml
   - kubectl-service-account.yaml
-  # TODO: Remove this
-  - test-notify-svc.yaml
 
 patches:
 - target:
@@ -13,14 +11,6 @@ patches:
     name: tom-jenkins
   path: plugins.yaml
 - path: statefulset-patch.yaml
-# - target:
-#     kind: Service
-#     name: gitwebhookproxy
-#   path: gwp-service-patch.yaml
-# - target:
-#     kind: Deployment
-#     name: gitwebhookproxy
-#   path: gwp-deployment-patch.yaml
 
 patchesStrategicMerge:
   - nodeport-patch.yaml
@@ -32,10 +22,10 @@ configMapGenerator:
     behavior: merge
     files:
       - jcasc-default-config.yaml=jcasc.yaml
-  # - name: gitwebhookproxy
-  #   behavior: merge
-  #   envs:
-  #   - jenkins.env
+  - name: gitwebhookproxy
+    behavior: merge
+    envs:
+    - gwp-config.env
 
 secretGenerator:
   - name: tom-jenkins-auth
