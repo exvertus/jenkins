@@ -36,3 +36,6 @@ secretGenerator:
     - gcp-sa.json=gcp-sa.json
     options:
       disableNameSuffixHash: true
+  - name: gitwebhookproxy
+    envs:
+    - gwp-secrets.env
