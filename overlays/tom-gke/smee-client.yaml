@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smee-client
+  labels:
+    app: smee-client
+spec:
+  replicas: 1
+  selector:
+    app: smee-client
+  template:
+    metadata:
+      labels:
+        app: smee-client
+    spec:
+      containers:
+      - name: smee-client
+        image: deltaprojects/smee-client
+        imagePullPolicy: IfNotPresent
+        args: ["--url=$$(SMEE_URL)",
+               ""]
