@@ -38,3 +38,8 @@ secretGenerator:
     - gcp-sa.json=gcp-sa.json
     options:
       disableNameSuffixHash: true
+  - name: smee-auth
+    envs:
+    - smee-auth.env
+    options:
+      disableNameSuffixHash: true
