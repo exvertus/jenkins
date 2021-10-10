@@ -18,8 +18,8 @@ spec:
       - name: smee-client
         image: deltaprojects/smee-client
         imagePullPolicy: IfNotPresent
-        args: ["--url=https://smee.io/$$(SMEE_ID)",
-              "--target=http://gke-tom-jenkins:8080"]
+        args: ["--url=https://smee.io/$(SMEE_ID)",
+               "--target=http://gke-tom-jenkins:8080/github-webhook/"]
         env:
         - name: SMEE_ID
           valueFrom:
