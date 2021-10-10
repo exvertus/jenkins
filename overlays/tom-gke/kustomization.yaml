@@ -4,7 +4,7 @@ resources:
   - ../../helm-base
   - agent-service-account.yaml
   - kubectl-service-account.yaml
-  # - smee-client.yaml
+  - smee-client.yaml
 
 patches:
 - target:

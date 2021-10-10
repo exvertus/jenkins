@@ -7,7 +7,8 @@ metadata:
 spec:
   replicas: 1
   selector:
-    app: smee-client
+    matchLabels:
+      app: smee-client
   template:
     metadata:
       labels:
@@ -17,5 +18,5 @@ spec:
       - name: smee-client
         image: deltaprojects/smee-client
         imagePullPolicy: IfNotPresent
-        args: ["--url=$$(SMEE_URL)",
-               ""]
+        args: ["--url=https://smee.io/$$(SMEE_ID)",
+               "--target=http://gke-tom-jenkins:8080"]
