@@ -8,6 +8,7 @@ spec:
     spec:
       containers:
         - name: jenkins
+          image: "jenkins/jenkins:lts-jdk11"
           volumeMounts:
             - mountPath: /run/secrets/jenkins-auth
               name: jenkins-auth
