@@ -6,19 +6,32 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+        - name: "init"
+          image: "jenkins/jenkins:lts-jdk11"
       containers:
         - name: jenkins
+          image: "jenkins/jenkins:lts-jdk11"
           volumeMounts:
             - mountPath: /run/secrets/jenkins-auth
               name: jenkins-auth
               readOnly: true
+          env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name          
+          - name: JAVA_OPTS
+            value: >-
+              -Dcasc.reload.token=$(POD_NAME) -Dorg.apache.commons.jelly.tags.fmt.timeZone=America/New_York
         - name: config-reload
           env:
-            - name: NAMESPACE
-              value: ""
-              valueFrom: 
-                fieldRef:
-                  fieldPath: metadata.namespace
+          - name: NAMESPACE
+            value: ""
+            valueFrom: 
+              fieldRef:
+                fieldPath: metadata.namespace
       volumes:
         - name: jenkins-auth
           secret:
