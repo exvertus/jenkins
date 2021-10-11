@@ -17,6 +17,11 @@ spec:
               name: jenkins-auth
               readOnly: true
           env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name          
           - name: JAVA_OPTS
             value: >-
               -Dcasc.reload.token=$(POD_NAME) -Dorg.apache.commons.jelly.tags.fmt.timeZone=America/New_York
