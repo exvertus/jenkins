@@ -13,6 +13,15 @@ jenkins
 
 ### How to...
 
+* Add webhook trigger for your github repo and job
+  * Using the values in `overlays/tom-gke/smee-auth.env`, create a webhook in github for your repository:
+    * Go to `Settings` > `Webhooks` > `Add webhook`
+    * Payload URL: `https://smee.io/[SMEE_ID]`
+    * Content type: `application/json`
+    * Secret: `[API_TOKEN]`
+    * Which events?
+      * `Let me select individual events`
+      * Check off `Pull requests` and `Pushes`
 * Deploy changes: `kubectl apply -k ./overlays/tom-gke`
 * Print out applied yaml to build folder: `kubectl apply -k ./overlays/tom-gke --dry-run=server -o yaml > build/dry-run.yaml`
 * Update base from helm in cloud shell

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smee-client
+  labels:
+    app: smee-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: smee-client
+  template:
+    metadata:
+      labels:
+        app: smee-client
+    spec:
+      containers:
+      - name: smee-client
+        image: deltaprojects/smee-client
+        imagePullPolicy: IfNotPresent
+        args: ["--url=https://smee.io/$(SMEE_ID)",
+               "--target=http://gke-tom-jenkins:8080/github-webhook/"]
+        env:
+        - name: SMEE_ID
+          valueFrom:
+            secretKeyRef:
+              name: gke-smee-auth
+              key: SMEE_ID

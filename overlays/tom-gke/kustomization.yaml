@@ -4,6 +4,7 @@ resources:
   - ../../helm-base
   - agent-service-account.yaml
   - kubectl-service-account.yaml
+  - smee-client.yaml
 
 patches:
 - target:
@@ -21,8 +22,13 @@ configMapGenerator:
     namespace: helm-base
     behavior: merge
     files:
-      - jcasc-default-config.yaml=jcasc.yaml
-
+    - jcasc-default-config.yaml=jcasc.yaml
+  - name: tom-jenkins-tests
+    namespace: helm-base
+    behavior: merge
+    files:
+    - run.sh=startup-tests.sh
+    
 secretGenerator:
   - name: tom-jenkins-auth
     envs:
@@ -30,5 +36,10 @@ secretGenerator:
   - name: gcp-sa
     files:
     - gcp-sa.json=gcp-sa.json
+    options:
+      disableNameSuffixHash: true
+  - name: smee-auth
+    envs:
+    - smee-auth.env
     options:
       disableNameSuffixHash: true
