@@ -4,4 +4,4 @@ metadata:
   name: tom-jenkins
   namespace: helm-base
   annotations:
-    beta.cloud.google.com/backend-config: '{"default": "gke-jenkins-be"}'
+    cloud.google.com/backend-config: '{"default": "gke-jenkins-be"}'
