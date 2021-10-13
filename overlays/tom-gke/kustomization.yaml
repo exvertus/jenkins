@@ -3,6 +3,7 @@ namespace: services
 resources:
   - ../../helm-base
   - agent-service-account.yaml
+  - backend-config.yaml
   - kubectl-service-account.yaml
   - smee-client.yaml
 
