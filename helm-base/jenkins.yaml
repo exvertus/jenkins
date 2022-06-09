@@ -7,7 +7,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -20,13 +20,13 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
 type: Opaque
 data:
-  jenkins-admin-password: "Yjd4VTRNVEFOT3dMdTIyU3Qwa1VHOA=="
+  jenkins-admin-password: "bTg0V1ppTHl0T3JqZmhUUHhFeERGTQ=="
   jenkins-admin-user: "YWRtaW4="
 ---
 # Source: jenkins/templates/config.yaml
@@ -62,10 +62,10 @@ data:
     yes n | cp -i /usr/share/jenkins/ref/plugins/* /var/jenkins_plugins/;
     echo "finished initialization"
   plugins.txt: |-
-    kubernetes:1.30.1
-    workflow-aggregator:2.6
-    git:4.8.2
-    configuration-as-code:1.52
+    kubernetes:3600.v144b_cd192ca_a_
+    workflow-aggregator:581.v0c46fa_697ffd
+    git:4.11.3
+    configuration-as-code:1429.v09b_044a_c93de
 ---
 # Source: jenkins/templates/jcasc-config.yaml
 apiVersion: v1
@@ -75,7 +75,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": jenkins
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -95,8 +95,6 @@ data:
             name: "Jenkins Admin"
             password: "${chart-admin-password}"
       disableRememberMe: false
-      remotingSecurity:
-        enabled: true
       mode: NORMAL
       numExecutors: 0
       labelString: ""
@@ -120,7 +118,8 @@ data:
             value: "true"
           templates:
             - name: "default"
-              id: 8e87a0373bebcc6a10449d2a90262bb02a7cf7e5ec63c98cc4e123b67e58650a
+              namespace: "helm-base"
+              id: be62f2fe67fa3e83c0157edaa53417c084c49a8aa88c3702e3ca1cc8df3fcbe2
               containers:
               - name: "jnlp"
                 alwaysPullImage: false
@@ -130,7 +129,7 @@ data:
                   - envVar:
                       key: "JENKINS_URL"
                       value: "http://tom-jenkins.helm-base.svc.cluster.local:8080/"
-                image: "jenkins/inbound-agent:4.6-1"
+                image: "jenkins/inbound-agent:4.11.2-4"
                 privileged: "false"
                 resourceLimitCpu: 512m
                 resourceLimitMemory: 512Mi
@@ -170,7 +169,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -190,7 +189,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -212,7 +211,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -231,7 +230,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -252,7 +251,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -273,7 +272,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -295,7 +294,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -317,7 +316,7 @@ metadata:
   namespace: helm-base
   labels:
     "app.kubernetes.io/name": 'jenkins'
-    "helm.sh/chart": "jenkins-3.5.18"
+    "helm.sh/chart": "jenkins-4.1.7"
     "app.kubernetes.io/managed-by": "Helm"
     "app.kubernetes.io/instance": "tom"
     "app.kubernetes.io/component": "jenkins-controller"
@@ -336,7 +335,7 @@ spec:
         "app.kubernetes.io/instance": "tom"
         "app.kubernetes.io/component": "jenkins-controller"
       annotations:
-        checksum/config: 6e59b21e88943eb94337411fc892bc745e43a1becc8e20433471e8f3cbafb226
+        checksum/config: 22c49ae63efabe20f440e43933c7eb522023d28a227a60158cbd801058418e5c
     spec:
       securityContext:
     
@@ -346,8 +345,13 @@ spec:
       serviceAccountName: "tom-jenkins"
       initContainers:
         - name: "init"
-          image: "jenkins/jenkins:2.303.1-jdk11"
+          image: "jenkins/jenkins:2.332.3-jdk11"
           imagePullPolicy: "Always"
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsUser: 1000
           command: [ "sh", "/var/jenkins_config/apply_config.sh" ]
           resources:
             limits:
@@ -365,12 +369,21 @@ spec:
               name: plugins
             - mountPath: /var/jenkins_plugins
               name: plugin-dir
+            - mountPath: /tmp
+              name: tmp-volume
       containers:
         - name: jenkins
-          image: "jenkins/jenkins:2.303.1-jdk11"
+          image: "jenkins/jenkins:2.332.3-jdk11"
           imagePullPolicy: "Always"
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 1000
+            runAsUser: 1000
           args: [ "--httpPort=8080"]
           env:
+            - name: SECRETS
+              value: /run/secrets/additional
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -380,7 +393,7 @@ spec:
                  -Dcasc.reload.token=$(POD_NAME) 
             - name: JENKINS_OPTS
               value: >-
-                
+                 --webroot=/var/jenkins_cache/war 
             - name: JENKINS_SLAVE_AGENT_PORT
               value: "50000"
             - name: CASC_JENKINS_CONFIG
@@ -390,6 +403,13 @@ spec:
               name: http
             - containerPort: 50000
               name: agent-listener
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: '/login'
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
           livenessProbe:
             failureThreshold: 5
             httpGet:
@@ -399,13 +419,6 @@ spec:
             timeoutSeconds: 5
           readinessProbe:
             failureThreshold: 3
-            httpGet:
-              path: '/login'
-              port: http
-            periodSeconds: 10
-            timeoutSeconds: 5
-          startupProbe:
-            failureThreshold: 12
             httpGet:
               path: '/login'
               port: http
@@ -430,17 +443,19 @@ spec:
               readOnly: false
             - name: sc-config-volume
               mountPath: /var/jenkins_home/casc_configs
-            - name: admin-secret
-              mountPath: /run/secrets/chart-admin-username
-              subPath: jenkins-admin-user
+            - name: jenkins-secrets
+              mountPath: /run/secrets/additional
               readOnly: true
-            - name: admin-secret
-              mountPath: /run/secrets/chart-admin-password
-              subPath: jenkins-admin-password
-              readOnly: true
+            - name: jenkins-cache
+              mountPath: /var/jenkins_cache
+            - mountPath: /tmp
+              name: tmp-volume
         - name: config-reload
-          image: "kiwigrid/k8s-sidecar:1.12.2"
+          image: "kiwigrid/k8s-sidecar:1.15.0"
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
           env:
             - name: POD_NAME
               valueFrom:
@@ -474,14 +489,25 @@ spec:
           name: tom-jenkins
       - name: plugin-dir
         emptyDir: {}
+      - name: jenkins-secrets
+        projected:
+          sources:
+          - secret:
+              name: tom-jenkins
+              items:
+                - key: jenkins-admin-user
+                  path: chart-admin-username
+                - key: jenkins-admin-password
+                  path: chart-admin-password
+      - name: jenkins-cache
+        emptyDir: {}
       - name: jenkins-home
         persistentVolumeClaim:
           claimName: tom-jenkins
       - name: sc-config-volume
         emptyDir: {}
-      - name: admin-secret
-        secret:
-          secretName: tom-jenkins
+      - name: tmp-volume
+        emptyDir: {}
 ---
 # Source: jenkins/templates/tests/test-config.yaml
 apiVersion: v1
@@ -501,7 +527,7 @@ data:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "tom-ui-test-z1tcl"
+  name: "tom-ui-test-6ckik"
   namespace: helm-base
   annotations:
     "helm.sh/hook": test-success
@@ -522,7 +548,7 @@ spec:
         name: tools
   containers:
     - name: tom-ui-test
-      image: jenkins/jenkins:2.303.1-jdk11
+      image: jenkins/jenkins:2.332.3-jdk11
       command: ["/tools/bats/bin/bats", "-t", "/tests/run.sh"]
       volumeMounts:
       - mountPath: /tests
