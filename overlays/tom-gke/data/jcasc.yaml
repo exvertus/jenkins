@@ -1,29 +1,4 @@
-jenkins:
-  disableRememberMe: false
-  markupFormatter: "plainText"
-  quietPeriod: 5
-  mode: NORMAL
-  numExecutors: 0
-  projectNamingStrategy: "standard"
 unclassified:
   location:
     adminAddress: "tflanig1@gmail.com"
     url: https://services.thomasflanigan.com/
-credentials:
-  system:
-    domainCredentials:
-      - credentials:
-          - fileSystemServiceAccountCredential:
-              id: "${jenkins-auth/service-account-id}"
-              scope: GLOBAL
-          - string:
-              description: "Tom's personal access token for github (exp 9/24/22)"
-              id: "exvertus-github-token"
-              scope: GLOBAL
-              secret: "${jenkins-auth/exvertus-github-token}"
-          - usernamePassword:
-              description: "Github personal access token for exvertus as username with password"
-              id: "exvertus-github-pat-up"
-              password: "${jenkins-auth/exvertus-github-token}"
-              scope: GLOBAL
-              username: "exvertus"

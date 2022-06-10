@@ -1,4 +1,10 @@
 jenkins:
+  disableRememberMe: false
+  markupFormatter: "plainText"
+  quietPeriod: 5
+  mode: NORMAL
+  numExecutors: 0
+  projectNamingStrategy: "standard"
 
   authorizationStrategy:
     globalMatrix:
@@ -13,6 +19,7 @@ jenkins:
       githubApiUri: "https://api.github.com"
       githubWebUri: "https://github.com"
       oauthScopes: "read:org,user:email,repo"
+
   clouds:
   - kubernetes:
       containerCap: 10
@@ -64,3 +71,22 @@ unclassified:
     configs:
       - credentialsId: "exvertus-github-token"
     hookUrl: "https://services.thomasflanigan.com/github-webhook/"
+
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - fileSystemServiceAccountCredential:
+              id: "${jenkins-auth/service-account-id}"
+              scope: GLOBAL
+          - string:
+              description: "Tom's personal access token for github (exp 9/24/22)"
+              id: "exvertus-github-token"
+              scope: GLOBAL
+              secret: "${jenkins-auth/exvertus-github-token}"
+          - usernamePassword:
+              description: "Github personal access token for exvertus as username with password"
+              id: "exvertus-github-pat-up"
+              password: "${jenkins-auth/exvertus-github-token}"
+              scope: GLOBAL
+              username: "exvertus"
