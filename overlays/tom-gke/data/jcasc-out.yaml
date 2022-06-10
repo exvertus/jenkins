@@ -1,0 +1,66 @@
+jenkins:
+
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "USER:Overall/Administer:exvertus"
+        - "USER:Overall/Read:anonymous"
+        - "GROUP:Overall/Read:authenticated"
+  securityRealm:
+    github:
+      clientID: "${jenkins-auth/client-id}"
+      clientSecret: "${jenkins-auth/client-secret}"
+      githubApiUri: "https://api.github.com"
+      githubWebUri: "https://github.com"
+      oauthScopes: "read:org,user:email,repo"
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      credentialsId: "${jenkins-auth/service-account-id}"
+      jenkinsTunnel: "gke-tom-jenkins-agent:50000"
+      jenkinsUrl: "http://gke-tom-jenkins:8080"
+      name: "kubernetes"
+      namespace: "services"
+      podLabels:
+      - key: "jenkins/cloud-agent"
+        value: "true"
+      templates:
+      - containers:
+        - args: "cat"
+          command: "/bin/sh -c"
+          image: "jenkins/inbound-agent"
+          livenessProbe:
+            failureThreshold: 0
+            initialDelaySeconds: 0
+            periodSeconds: 0
+            successThreshold: 0
+            timeoutSeconds: 0
+          name: "jnlp"
+          ttyEnabled: true
+          workingDir: "/home/jenkins/agent"
+        id: "45330aca-c5bb-45d2-bde1-0834dd247ba3"
+        label: "cloud-agent"
+        name: "jnlp agent"
+        namespace: "services"
+        nodeUsageMode: "NORMAL"
+        serviceAccount: "gke-agent-sa"
+        yamlMergeStrategy: "override"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+
+unclassified:
+
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleForNormalize
+  gitHubPluginConfig:
+    configs:
+      - credentialsId: "exvertus-github-token"
+    hookUrl: "https://services.thomasflanigan.com/github-webhook/"
