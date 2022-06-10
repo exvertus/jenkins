@@ -1,17 +1,4 @@
 jenkins:
-  disableRememberMe: false
-  markupFormatter: "plainText"
-  quietPeriod: 5
-  mode: NORMAL
-  numExecutors: 0
-  projectNamingStrategy: "standard"
-
-  authorizationStrategy:
-    globalMatrix:
-      permissions:
-        - "USER:Overall/Administer:exvertus"
-        - "USER:Overall/Read:anonymous"
-        - "GROUP:Overall/Read:authenticated"
   securityRealm:
     github:
       clientID: "${jenkins-auth/client-id}"
@@ -53,15 +40,6 @@ jenkins:
         nodeUsageMode: "NORMAL"
         serviceAccount: "gke-agent-sa"
         yamlMergeStrategy: "override"
-  crumbIssuer:
-    standard:
-      excludeClientIPFromCrumb: false
-
-security:
-  apiToken:
-    creationOfLegacyTokenEnabled: false
-    tokenGenerationOnCreationEnabled: false
-    usageStatisticsEnabled: true
 
 unclassified:
 

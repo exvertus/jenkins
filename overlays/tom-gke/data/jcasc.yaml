@@ -1,3 +1,38 @@
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+      - "USER:Overall/Administer:exvertus"
+      - "GROUP:Metrics/HealthCheck:authenticated"
+      - "GROUP:Metrics/ThreadDump:authenticated"
+      - "GROUP:Metrics/View:authenticated"
+      - "GROUP:Overall/Read:authenticated"
+      - "USER:Metrics/HealthCheck:anonymous"
+      - "USER:Metrics/ThreadDump:anonymous"
+      - "USER:Metrics/View:anonymous"
+      - "USER:Overall/Read:anonymous"
+  crumbIssuer: "strict"
+  disableRememberMe: false
+  markupFormatter: "plainText"
+  mode: NORMAL
+  numExecutors: 0
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  sSHD:
+    port: -1
 unclassified:
   location:
     adminAddress: "tflanig1@gmail.com"
