@@ -5,3 +5,11 @@ metadata:
   namespace: helm-base
   annotations:
     beta.cloud.google.com/backend-config: '{"default": "svcs-ingress-be"}'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tom-jenkins
+  namespace: helm-base
+spec:
+  type: NodePort

@@ -1,38 +1,17 @@
-credentials:
-  system:
-    domainCredentials:
-      - credentials:
-          - fileSystemServiceAccountCredential:
-              id: "${jenkins-auth/service-account-id}"
-              scope: GLOBAL
-          - string:
-              description: "Tom's personal access token for github (exp 9/24/22)"
-              id: "exvertus-github-token"
-              scope: GLOBAL
-              secret: "${jenkins-auth/exvertus-github-token}"
-          - usernamePassword:
-              description: "Github personal access token for exvertus as username with password"
-              id: "exvertus-github-pat-up"
-              password: "${jenkins-auth/exvertus-github-token}"
-              scope: GLOBAL
-              username: "exvertus"
 jenkins:
   authorizationStrategy:
     globalMatrix:
       permissions:
-        - "Credentials/View:authenticated"
-        - "Job/Build:authenticated"
-        - "Job/Cancel:authenticated"
-        - "Job/Read:authenticated"
-        - "Overall/Read:anonymous"
-        - "Overall/Read:authenticated"
-        - "Run/Update:authenticated"
-        - "View/Configure:authenticated"
-        - "View/Create:authenticated"
-        - "View/Delete:authenticated"
-        - "View/Read:authenticated"
-        - "Overall/Administer:exvertus"
-        - "Overall/Administer:apkatsikas"
+        - "USER:Overall/Administer:exvertus"
+        - "USER:Overall/Read:anonymous"
+        - "GROUP:Overall/Read:authenticated"
+  securityRealm:
+    github:
+      clientID: "${jenkins-auth/client-id}"
+      clientSecret: "${jenkins-auth/client-secret}"
+      githubApiUri: "https://api.github.com"
+      githubWebUri: "https://github.com"
+      oauthScopes: "read:org,user:email,repo"
   clouds:
   - kubernetes:
       containerCap: 10
@@ -71,18 +50,9 @@ jenkins:
   disableRememberMe: false
   markupFormatter: "plainText"
   quietPeriod: 5
-  remotingSecurity:
-    enabled: true
   mode: NORMAL
   numExecutors: 0
   projectNamingStrategy: "standard"
-  securityRealm:
-    github:
-      clientID: "${jenkins-auth/client-id}"
-      clientSecret: "${jenkins-auth/client-secret}"
-      githubApiUri: "https://api.github.com"
-      githubWebUri: "https://github.com"
-      oauthScopes: "read:org,user:email,repo"
 security:
   apiToken:
     creationOfLegacyTokenEnabled: false
@@ -98,3 +68,21 @@ unclassified:
   location:
     adminAddress: "tflanig1@gmail.com"
     url: https://services.thomasflanigan.com/
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - fileSystemServiceAccountCredential:
+              id: "${jenkins-auth/service-account-id}"
+              scope: GLOBAL
+          - string:
+              description: "Tom's personal access token for github (exp 9/24/22)"
+              id: "exvertus-github-token"
+              scope: GLOBAL
+              secret: "${jenkins-auth/exvertus-github-token}"
+          - usernamePassword:
+              description: "Github personal access token for exvertus as username with password"
+              id: "exvertus-github-pat-up"
+              password: "${jenkins-auth/exvertus-github-token}"
+              scope: GLOBAL
+              username: "exvertus"

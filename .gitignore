@@ -1,4 +1,5 @@
 .idea
-overlays/tom-gke/*.env
+overlays/tom-gke/data/*.env
+overlays/tom-gke/data/*.json
 overlays/tom-gke/gcp-sa.json
 build/*

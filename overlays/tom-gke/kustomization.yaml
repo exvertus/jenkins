@@ -1,9 +1,10 @@
 namePrefix: gke-
 namespace: services
+commonLabels:
+  service: jenkins
 resources:
   - ../../helm-base
-  - agent-service-account.yaml
-  - kubectl-service-account.yaml
+  - service-accounts.yaml
   - smee-client.yaml
 
 patches:
@@ -14,32 +15,31 @@ patches:
 - path: statefulset-patch.yaml
 
 patchesStrategicMerge:
-  - nodeport-patch.yaml
-  - backend-annotation-patch.yaml
+  - services.yaml
 
 configMapGenerator:
   - name: tom-jenkins-jenkins-jcasc-config
     namespace: helm-base
     behavior: merge
     files:
-    - jcasc-default-config.yaml=jcasc.yaml
+    - jcasc-default-config.yaml=data/jcasc.yaml
   - name: tom-jenkins-tests
     namespace: helm-base
     behavior: merge
     files:
-    - run.sh=startup-tests.sh
+    - run.sh=data/startup-tests.sh
     
 secretGenerator:
   - name: tom-jenkins-auth
     envs:
-    - jenkins-auth.env
+    - data/jenkins-auth.env
   - name: gcp-sa
     files:
-    - gcp-sa.json=gcp-sa.json
+    - gcp-sa.json=data/gcp-sa.json
     options:
       disableNameSuffixHash: true
   - name: smee-auth
     envs:
-    - smee-auth.env
+    - data/smee-auth.env
     options:
       disableNameSuffixHash: true

@@ -1,9 +1,6 @@
 - op: replace
   path: /data/plugins.txt
   value: |-
-    audit-trail:latest
-    blueocean:latest
-    build-history-metrics-plugin:latest
     configuration-as-code:latest
     credentials-binding:latest
     git:latest

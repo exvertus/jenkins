@@ -8,10 +8,10 @@ spec:
     spec:
       initContainers:
         - name: "init"
-          image: "jenkins/jenkins:lts-jdk11"
+          image: "jenkins/jenkins:2.332.3-jdk11"
       containers:
         - name: jenkins
-          image: "jenkins/jenkins:lts-jdk11"
+          image: "jenkins/jenkins:2.332.3-jdk11"
           volumeMounts:
             - mountPath: /run/secrets/jenkins-auth
               name: jenkins-auth
