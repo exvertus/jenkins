@@ -12,7 +12,7 @@ patches:
     kind: ConfigMap
     name: tom-jenkins
   path: plugins.yaml
-# - path: statefulset-patch.yaml
+- path: statefulset-patch.yaml
 
 patchesStrategicMerge:
   - services.yaml
@@ -35,7 +35,7 @@ secretGenerator:
     - data/jenkins-auth.env
   - name: gcp-sa
     files:
-    - data/gcp-sa.json=gcp-sa.json
+    - gcp-sa.json=data/gcp-sa.json
     options:
       disableNameSuffixHash: true
   - name: smee-auth
