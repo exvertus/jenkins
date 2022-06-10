@@ -41,6 +41,7 @@ jenkins:
         id: "45330aca-c5bb-45d2-bde1-0834dd247ba3"
         label: "cloud-agent"
         name: "jnlp agent"
+        namespace: "services"
         nodeUsageMode: "NORMAL"
         serviceAccount: "gke-agent-sa"
         yamlMergeStrategy: "override"
