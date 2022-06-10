@@ -1,16 +1,17 @@
 namePrefix: gke-
 namespace: services
+commonLabels:
+  service: jenkins
 resources:
   - ../../helm-base
-  # - agent-service-account.yaml
-  # - kubectl-service-account.yaml
+  - service-accounts.yaml
   # - smee-client.yaml
 
-# patches:
-# - target:
-#     kind: ConfigMap
-#     name: tom-jenkins
-#   path: plugins.yaml
+patches:
+- target:
+    kind: ConfigMap
+    name: tom-jenkins
+  path: plugins.yaml
 # - path: statefulset-patch.yaml
 
 # patchesStrategicMerge:

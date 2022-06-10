@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: smee-client
-        image: deltaprojects/smee-client
+        image: deltaprojects/smee-client:latest
         imagePullPolicy: IfNotPresent
         args: ["--url=https://smee.io/$(SMEE_ID)",
                "--target=http://gke-tom-jenkins:8080/github-webhook/"]
