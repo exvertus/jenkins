@@ -1,11 +1,10 @@
 jenkins:
-  securityRealm:
-    github:
-      clientID: "${jenkins-auth/client-id}"
-      clientSecret: "${jenkins-auth/client-secret}"
-      githubApiUri: "https://api.github.com"
-      githubWebUri: "https://github.com"
-      oauthScopes: "read:org,user:email,repo"
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "USER:Overall/Administer:exvertus"
+        - "USER:Overall/Read:anonymous"
+        - "GROUP:Overall/Read:authenticated"
 security:
   apiToken:
     creationOfLegacyTokenEnabled: false
