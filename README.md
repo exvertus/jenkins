@@ -1,6 +1,6 @@
 # Jenkins
 Jenkins instance for GKE using `helm template` command as base for kustomization.  
-If you are contributing, the general rule of thumb is everything through git; as-code if you can, sh script in few the instances you can't.  
+If you are contributing, the general rule of thumb is everything through git; as-code if you can, sh script when you can't.  
 
 Dotted lines indicate inheritance:
 
