@@ -5,7 +5,7 @@ commonLabels:
 resources:
   - ../../helm-base
   - service-accounts.yaml
-  # - smee-client.yaml
+  - smee-client.yaml
 
 patches:
 - target:
@@ -14,33 +14,32 @@ patches:
   path: plugins.yaml
 # - path: statefulset-patch.yaml
 
-# patchesStrategicMerge:
-#   - nodeport-patch.yaml
-#   - backend-annotation-patch.yaml
+patchesStrategicMerge:
+  - services.yaml
 
-# configMapGenerator:
-#   - name: tom-jenkins-jenkins-jcasc-config
-#     namespace: helm-base
-#     behavior: merge
-#     files:
-#     - jcasc-default-config.yaml=jcasc.yaml
-#   - name: tom-jenkins-tests
-#     namespace: helm-base
-#     behavior: merge
-#     files:
-#     - run.sh=startup-tests.sh
+configMapGenerator:
+  # - name: tom-jenkins-jenkins-jcasc-config
+  #   namespace: helm-base
+  #   behavior: merge
+  #   files:
+  #   - jcasc-default-config.yaml=data/jcasc.yaml
+  - name: tom-jenkins-tests
+    namespace: helm-base
+    behavior: merge
+    files:
+    - run.sh=data/startup-tests.sh
     
-# secretGenerator:
-#   - name: tom-jenkins-auth
-#     envs:
-#     - jenkins-auth.env
-#   - name: gcp-sa
-#     files:
-#     - gcp-sa.json=gcp-sa.json
-#     options:
-#       disableNameSuffixHash: true
-#   - name: smee-auth
-#     envs:
-#     - smee-auth.env
-#     options:
-#       disableNameSuffixHash: true
+secretGenerator:
+  - name: tom-jenkins-auth
+    envs:
+    - data/jenkins-auth.env
+  - name: gcp-sa
+    files:
+    - data/gcp-sa.json=gcp-sa.json
+    options:
+      disableNameSuffixHash: true
+  - name: smee-auth
+    envs:
+    - data/smee-auth.env
+    options:
+      disableNameSuffixHash: true
