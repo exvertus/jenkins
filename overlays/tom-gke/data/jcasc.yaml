@@ -11,6 +11,12 @@ security:
     tokenGenerationOnCreationEnabled: false
     usageStatisticsEnabled: true
 unclassified:
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleForNormalize
+  gitHubPluginConfig:
+    configs:
+      - credentialsId: "exvertus-github-token"
+    hookUrl: "https://services.thomasflanigan.com/github-webhook/"
   location:
     adminAddress: "tflanig1@gmail.com"
     url: https://services.thomasflanigan.com/

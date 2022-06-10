@@ -17,22 +17,6 @@ credentials:
               scope: GLOBAL
               username: "exvertus"
 jenkins:
-  authorizationStrategy:
-    globalMatrix:
-      permissions:
-        - "Credentials/View:authenticated"
-        - "Job/Build:authenticated"
-        - "Job/Cancel:authenticated"
-        - "Job/Read:authenticated"
-        - "Overall/Read:anonymous"
-        - "Overall/Read:authenticated"
-        - "Run/Update:authenticated"
-        - "View/Configure:authenticated"
-        - "View/Create:authenticated"
-        - "View/Delete:authenticated"
-        - "View/Read:authenticated"
-        - "Overall/Administer:exvertus"
-        - "Overall/Administer:apkatsikas"
   clouds:
   - kubernetes:
       containerCap: 10
@@ -93,6 +77,3 @@ unclassified:
     configs:
       - credentialsId: "exvertus-github-token"
     hookUrl: "https://services.thomasflanigan.com/github-webhook/"
-  location:
-    adminAddress: "tflanig1@gmail.com"
-    url: https://services.thomasflanigan.com/
