@@ -33,6 +33,8 @@ secretGenerator:
   - name: tom-jenkins-auth
     envs:
     - data/jenkins-auth.env
+    options:
+      disableNameSuffixHash: true
   - name: gcp-sa
     files:
     - gcp-sa.json=data/gcp-sa.json

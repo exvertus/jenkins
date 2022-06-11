@@ -12,10 +12,6 @@ spec:
       containers:
         - name: jenkins
           image: "jenkins/jenkins:2.332.3-jdk11"
-          volumeMounts:
-            - mountPath: /run/secrets/jenkins-auth
-              name: jenkins-auth
-              readOnly: true
           env:
           - name: POD_NAME
             valueFrom:
@@ -33,6 +29,6 @@ spec:
               fieldRef:
                 fieldPath: metadata.namespace
       volumes:
-        - name: jenkins-auth
+        - name: jenkins-secrets
           secret:
             secretName: gke-tom-jenkins-auth
