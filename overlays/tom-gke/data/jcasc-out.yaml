@@ -34,15 +34,6 @@ jenkins:
         serviceAccount: "gke-agent-sa"
         yamlMergeStrategy: "override"
 
-unclassified:
-
-  gitHubConfiguration:
-    apiRateLimitChecker: ThrottleForNormalize
-  gitHubPluginConfig:
-    configs:
-      - credentialsId: "exvertus-github-token"
-    hookUrl: "https://services.thomasflanigan.com/github-webhook/"
-
 credentials:
   system:
     domainCredentials:

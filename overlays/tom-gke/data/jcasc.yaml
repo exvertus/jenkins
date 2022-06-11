@@ -66,3 +66,7 @@ credentials:
               password: "${readFile:/run/secrets/additional/exvertus-github-token}"
               scope: GLOBAL
               username: "exvertus"
+          - fileSystemServiceAccountCredential:
+              id: "${readFile:/run/secrets/additional/k8s-sa-jenkins-cred}"
+              description: "k8s SA Jenkins cred"
+              scope: GLOBAL
