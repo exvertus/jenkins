@@ -22,7 +22,7 @@ configMapGenerator:
     namespace: helm-base
     behavior: merge
     files:
-    - jcasc-default-config.yaml=data/jcasc.yaml
+    - jcasc-default-config.yaml=jcasc.yaml
   - name: tom-jenkins-tests
     namespace: helm-base
     behavior: merge

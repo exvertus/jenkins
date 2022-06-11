@@ -14,6 +14,39 @@ jenkins:
       - "USER:Metrics/ThreadDump:anonymous"
       - "USER:Metrics/View:anonymous"
       - "USER:Overall/Read:anonymous"
+  clouds:
+  - kubernetes:
+      containerCap: 10
+      containerCapStr: "10"
+      credentialsId: "${readFile:/run/secrets/additional/k8s-sa-jenkins-cred-id}"
+      jenkinsTunnel: "gke-tom-jenkins-agent:50000"
+      jenkinsUrl: "http://gke-tom-jenkins:8080"
+      name: "kubernetes"
+      namespace: "services"
+      podLabels:
+      - key: "service"
+        value: "jenkins"
+      - key: "function"
+        value: "jobPod"
+      templates:
+      - containers:
+        - args: "9999999"
+          command: "sleep"
+          image: "jenkins/inbound-agent"
+          livenessProbe:
+            failureThreshold: 0
+            initialDelaySeconds: 0
+            periodSeconds: 0
+            successThreshold: 0
+            timeoutSeconds: 0
+          name: "jnlp"
+          workingDir: "/home/jenkins/agent"
+        instanceCap: 3
+        instanceCapStr: "3"
+        label: "function=jobPod"
+        name: "jnlpPod"
+        serviceAccount: "gke-agent-sa"
+        yamlMergeStrategy: "override"
   crumbIssuer: "strict"
   disableRememberMe: false
   markupFormatter: "plainText"
@@ -67,6 +100,6 @@ credentials:
               scope: GLOBAL
               username: "exvertus"
           - fileSystemServiceAccountCredential:
-              id: "${readFile:/run/secrets/additional/k8s-sa-jenkins-cred}"
+              id: "${readFile:/run/secrets/additional/k8s-sa-jenkins-cred-id}"
               description: "k8s SA Jenkins cred"
               scope: GLOBAL
