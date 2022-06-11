@@ -26,6 +26,7 @@ jenkins:
   quietPeriod: 5
   remotingSecurity:
     enabled: true
+  systemMessage: "${readFile:/run/secrets/additional/system-message}"
 security:
   apiToken:
     creationOfLegacyTokenEnabled: false
