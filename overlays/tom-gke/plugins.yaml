@@ -11,5 +11,6 @@
     google-oauth-plugin:latest
     kubernetes:latest
     matrix-auth:latest
+    strict-crumb-issuer:latest
     workflow-job:latest
     workflow-aggregator:latest

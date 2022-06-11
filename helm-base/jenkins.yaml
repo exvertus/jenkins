@@ -489,16 +489,17 @@ spec:
           name: tom-jenkins
       - name: plugin-dir
         emptyDir: {}
-      - name: jenkins-secrets
-        projected:
-          sources:
-          - secret:
-              name: tom-jenkins
-              items:
-                - key: jenkins-admin-user
-                  path: chart-admin-username
-                - key: jenkins-admin-password
-                  path: chart-admin-password
+      # TODO: Figure out how to remove this through kustomize
+      # - name: jenkins-secrets
+      #   projected:
+      #     sources:
+      #     - secret:
+      #         name: tom-jenkins
+      #         items:
+      #           - key: jenkins-admin-user
+      #             path: chart-admin-username
+      #           - key: jenkins-admin-password
+      #             path: chart-admin-password
       - name: jenkins-cache
         emptyDir: {}
       - name: jenkins-home

@@ -22,7 +22,7 @@ configMapGenerator:
     namespace: helm-base
     behavior: merge
     files:
-    - jcasc-default-config.yaml=data/jcasc.yaml
+    - jcasc-default-config.yaml=jcasc.yaml
   - name: tom-jenkins-tests
     namespace: helm-base
     behavior: merge
@@ -33,6 +33,8 @@ secretGenerator:
   - name: tom-jenkins-auth
     envs:
     - data/jenkins-auth.env
+    options:
+      disableNameSuffixHash: true
   - name: gcp-sa
     files:
     - gcp-sa.json=data/gcp-sa.json

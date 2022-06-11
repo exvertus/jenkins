@@ -1,33 +1,37 @@
 jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
   authorizationStrategy:
     globalMatrix:
       permissions:
-        - "USER:Overall/Administer:exvertus"
-        - "USER:Overall/Read:anonymous"
-        - "GROUP:Overall/Read:authenticated"
-  securityRealm:
-    github:
-      clientID: "${jenkins-auth/client-id}"
-      clientSecret: "${jenkins-auth/client-secret}"
-      githubApiUri: "https://api.github.com"
-      githubWebUri: "https://github.com"
-      oauthScopes: "read:org,user:email,repo"
+      - "USER:Overall/Administer:exvertus"
+      - "GROUP:Metrics/HealthCheck:authenticated"
+      - "GROUP:Metrics/ThreadDump:authenticated"
+      - "GROUP:Metrics/View:authenticated"
+      - "GROUP:Overall/Read:authenticated"
+      - "USER:Metrics/HealthCheck:anonymous"
+      - "USER:Metrics/ThreadDump:anonymous"
+      - "USER:Metrics/View:anonymous"
+      - "USER:Overall/Read:anonymous"
   clouds:
   - kubernetes:
       containerCap: 10
       containerCapStr: "10"
-      credentialsId: "${jenkins-auth/service-account-id}"
+      credentialsId: "${readFile:/run/secrets/additional/k8s-sa-jenkins-cred-id}"
       jenkinsTunnel: "gke-tom-jenkins-agent:50000"
       jenkinsUrl: "http://gke-tom-jenkins:8080"
       name: "kubernetes"
       namespace: "services"
       podLabels:
-      - key: "jenkins/cloud-agent"
-        value: "true"
+      - key: "service"
+        value: "jenkins"
+      - key: "function"
+        value: "jobPod"
       templates:
       - containers:
-        - args: "cat"
-          command: "/bin/sh -c"
+        - args: "9999999"
+          command: "sleep"
           image: "jenkins/inbound-agent"
           livenessProbe:
             failureThreshold: 0
@@ -36,28 +40,40 @@ jenkins:
             successThreshold: 0
             timeoutSeconds: 0
           name: "jnlp"
-          ttyEnabled: true
           workingDir: "/home/jenkins/agent"
-        id: "45330aca-c5bb-45d2-bde1-0834dd247ba3"
-        label: "cloud-agent"
-        name: "jnlp agent"
-        nodeUsageMode: "NORMAL"
+        instanceCap: 3
+        instanceCapStr: "3"
+        label: "function=jobPod"
+        name: "jnlpPod"
         serviceAccount: "gke-agent-sa"
         yamlMergeStrategy: "override"
-  crumbIssuer:
-    standard:
-      excludeClientIPFromCrumb: false
+  crumbIssuer: "strict"
   disableRememberMe: false
   markupFormatter: "plainText"
-  quietPeriod: 5
   mode: NORMAL
   numExecutors: 0
+  primaryView:
+    all:
+      name: "all"
   projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  securityRealm:
+    github:
+      clientID: "${readFile:/run/secrets/additional/client-id}"
+      clientSecret: "${readFile:/run/secrets/additional/client-secret}"
+      githubApiUri: "https://api.github.com"
+      githubWebUri: "https://github.com"
+      oauthScopes: "read:org,user:email,repo"
+  systemMessage: "${readFile:/run/secrets/additional/system-message}"
 security:
   apiToken:
     creationOfLegacyTokenEnabled: false
     tokenGenerationOnCreationEnabled: false
     usageStatisticsEnabled: true
+  sSHD:
+    port: -1
 unclassified:
   gitHubConfiguration:
     apiRateLimitChecker: ThrottleForNormalize
@@ -72,17 +88,18 @@ credentials:
   system:
     domainCredentials:
       - credentials:
-          - fileSystemServiceAccountCredential:
-              id: "${jenkins-auth/service-account-id}"
-              scope: GLOBAL
           - string:
               description: "Tom's personal access token for github (exp 9/24/22)"
               id: "exvertus-github-token"
               scope: GLOBAL
-              secret: "${jenkins-auth/exvertus-github-token}"
+              secret: "${readFile:/run/secrets/additional/exvertus-github-token}"
           - usernamePassword:
               description: "Github personal access token for exvertus as username with password"
-              id: "exvertus-github-pat-up"
-              password: "${jenkins-auth/exvertus-github-token}"
+              id: "exvertus-github-userpass"
+              password: "${readFile:/run/secrets/additional/exvertus-github-token}"
               scope: GLOBAL
               username: "exvertus"
+          - fileSystemServiceAccountCredential:
+              id: "${readFile:/run/secrets/additional/k8s-sa-jenkins-cred-id}"
+              description: "k8s SA Jenkins cred"
+              scope: GLOBAL
