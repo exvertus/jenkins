@@ -26,6 +26,13 @@ jenkins:
   quietPeriod: 5
   remotingSecurity:
     enabled: true
+  securityRealm:
+    github:
+      clientID: "${readFile:/run/secrets/additional/client-id}"
+      clientSecret: "${readFile:/run/secrets/additional/client-secret}"
+      githubApiUri: "https://api.github.com"
+      githubWebUri: "https://github.com"
+      oauthScopes: "read:org,user:email,repo"
   systemMessage: "${readFile:/run/secrets/additional/system-message}"
 security:
   apiToken:
@@ -35,6 +42,27 @@ security:
   sSHD:
     port: -1
 unclassified:
+  gitHubConfiguration:
+    apiRateLimitChecker: ThrottleForNormalize
+  gitHubPluginConfig:
+    configs:
+      - credentialsId: "exvertus-github-token"
+    hookUrl: "https://services.thomasflanigan.com/github-webhook/"
   location:
     adminAddress: "tflanig1@gmail.com"
     url: https://services.thomasflanigan.com/
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - string:
+              description: "Tom's personal access token for github (exp 9/24/22)"
+              id: "exvertus-github-token"
+              scope: GLOBAL
+              secret: "${readFile:/run/secrets/additional/exvertus-github-token}"
+          - usernamePassword:
+              description: "Github personal access token for exvertus as username with password"
+              id: "exvertus-github-userpass"
+              password: "${readFile:/run/secrets/additional/exvertus-github-token}"
+              scope: GLOBAL
+              username: "exvertus"
